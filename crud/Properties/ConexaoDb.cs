@@ -13,7 +13,7 @@ namespace crud.Properties
 
         public ConexaoDb()
         {
-            cn = new SqlConnection();
+            cn = new SqlConnection();A
         }
 
     }
