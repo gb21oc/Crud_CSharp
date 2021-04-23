@@ -54,6 +54,7 @@ namespace crud
             this.btnLogar.TabIndex = 1;
             this.btnLogar.Text = "Logar";
             this.btnLogar.UseVisualStyleBackColor = true;
+            this.btnLogar.Click += new System.EventHandler(this.btnLogar_Click);
             // 
             // txtLogin
             // 
