@@ -14,12 +14,6 @@ namespace crud.Properties
     {
         public SqlConnection cn { get; set; }
 
-        public ConexaoDb()
-        {
-            cn = new SqlConnection(ConfigurationManager.ConnectionStrings[@"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=master;Data Source=WKT-0065D\SQLEXPRESS"].ToString());
-            cn.Open();
-        }
-
         public void FecharConexao()
         {
             cn.Close();
@@ -42,7 +36,8 @@ namespace crud.Properties
             }
             catch (SqlException ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Ocorreu um erro");
+                //MessageBox.Show(ex.ToString());
             }
             return td;
         }
@@ -59,20 +54,22 @@ namespace crud.Properties
 
         public void ExecutaQuery(string sql)
         {
-            SqlTransaction sqlTransaction = cn.BeginTransaction();
             try
             {
+                cn = new SqlConnection("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=CrudCsharp;Data Source=LAPTOP-BQIMSF2O\\SQLEXPRESS");
+                cn.Open();
                 //Comando para a execução
-                SqlCommand command = new SqlCommand();
+                SqlCommand command = new SqlCommand(sql, cn);
                 command.CommandTimeout = 50000;
-                command.Transaction = sqlTransaction;
                 command.ExecuteNonQuery();
-                sqlTransaction.Commit();
             }
             catch (SqlException ex)
             {
-                sqlTransaction.Rollback();
                 MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
             }
         }
 

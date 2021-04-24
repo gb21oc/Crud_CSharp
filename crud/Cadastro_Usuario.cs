@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,11 +12,18 @@ using System.Windows.Forms;
 
 namespace crud
 {
-    public partial class Form1 : Form
+    public partial class Cadastro_Usuario : Form
     {
-        public Form1()
+        public Cadastro_Usuario()
         {
             InitializeComponent();
+        }
+
+        public void LimparDados()
+        {
+            txtEmail.Text = "";
+            txtName.Text = "";
+            txtSenha.Text = "";
         }
 
         public bool confereCaracteresPerigosos(string input)
@@ -40,7 +48,7 @@ namespace crud
                 MessageBox.Show("Esta sendo utilizado caracteres perigosos, seu ip foi salvo e irá para analise");
                 return false;
             }
-            if(input.Contains("select") || input.Contains("SELECT"))
+            if (input.Contains("select") || input.Contains("SELECT"))
             {
                 MessageBox.Show("Esta sendo utilizado caracteres perigosos, seu ip foi salvo e irá para analise");
                 return false;
@@ -51,43 +59,54 @@ namespace crud
             }
         }
 
-        private void btnLogar_Click(object sender, EventArgs e)
+        private void btnLimpar_Click(object sender, EventArgs e)
         {
-            ConexaoDb conexaoDb = new ConexaoDb();
+            LimparDados();
+        }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            ConexaoDb conexaodb = new ConexaoDb();
             try
             {
                 string sql = "";
-                if (confereCaracteresPerigosos(txtLogin.Text))
+                if (String.IsNullOrEmpty(txtEmail.Text) || String.IsNullOrEmpty(txtName.Text) || String.IsNullOrEmpty(txtSenha.Text))
                 {
-                    sql = "SELECT * FROM Crud_User WHERE (" + 
-                        "'" + txtLogin.Text + "', " +
-                        "'" + txtSenha.Text + "'" +
-                        ")";
-                    conexaoDb.ExecutaQuery(sql);
+                    MessageBox.Show("Algum campo ficou vazio, não sera possivel efetuar o cadastro!");
+                    return;
                 }
+                if (confereCaracteresPerigosos(txtEmail.Text))
+                {
+                    if (confereCaracteresPerigosos(txtName.Text))
+                    {
+                        sql = "INSERT INTO Crud_User(nome, email, senha) VALUES ( " +
+                            "'" + txtName.Text + "', " +
+                            "'" + txtEmail.Text + "', " +
+                            "'" + txtSenha.Text + "'" +
+                            ")";
 
+                        conexaodb.ExecutaQuery(sql);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    return;
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+                return;
             }
             finally
             {
-                conexaoDb.FecharConexao();
+                LimparDados();
             }
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Cadastro_Usuario cadastro = new Cadastro_Usuario();
-            cadastro.Show();
-            Hide();
-        }
-
-        private void btnLimpar_Click(object sender, EventArgs e)
-        {
-            txtLogin.Text = "";
-            txtSenha.Text = "";
+            MessageBox.Show("Cadastro efetuado com sucesso!");
         }
     }
 }

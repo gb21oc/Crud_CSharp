@@ -34,6 +34,8 @@ namespace crud
             this.txtLogin = new System.Windows.Forms.TextBox();
             this.txtSenha = new System.Windows.Forms.TextBox();
             this.lblSenha = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.btnLimpar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblLogin
@@ -48,9 +50,9 @@ namespace crud
             // 
             // btnLogar
             // 
-            this.btnLogar.Location = new System.Drawing.Point(167, 179);
+            this.btnLogar.Location = new System.Drawing.Point(233, 155);
             this.btnLogar.Name = "btnLogar";
-            this.btnLogar.Size = new System.Drawing.Size(127, 32);
+            this.btnLogar.Size = new System.Drawing.Size(87, 32);
             this.btnLogar.TabIndex = 1;
             this.btnLogar.Text = "Logar";
             this.btnLogar.UseVisualStyleBackColor = true;
@@ -67,6 +69,7 @@ namespace crud
             // 
             this.txtSenha.Location = new System.Drawing.Point(141, 114);
             this.txtSenha.Name = "txtSenha";
+            this.txtSenha.PasswordChar = '*';
             this.txtSenha.Size = new System.Drawing.Size(179, 20);
             this.txtSenha.TabIndex = 4;
             // 
@@ -80,11 +83,34 @@ namespace crud
             this.lblSenha.TabIndex = 3;
             this.lblSenha.Text = "Senha:";
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(186, 201);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(66, 13);
+            this.linkLabel1.TabIndex = 5;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Cadastrar-se";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // btnLimpar
+            // 
+            this.btnLimpar.Location = new System.Drawing.Point(129, 155);
+            this.btnLimpar.Name = "btnLimpar";
+            this.btnLimpar.Size = new System.Drawing.Size(87, 32);
+            this.btnLimpar.TabIndex = 6;
+            this.btnLimpar.Text = "Limpar";
+            this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(449, 247);
+            this.ClientSize = new System.Drawing.Size(413, 247);
+            this.Controls.Add(this.btnLimpar);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.txtSenha);
             this.Controls.Add(this.lblSenha);
             this.Controls.Add(this.txtLogin);
@@ -104,6 +130,8 @@ namespace crud
         private System.Windows.Forms.TextBox txtLogin;
         private System.Windows.Forms.TextBox txtSenha;
         private System.Windows.Forms.Label lblSenha;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Button btnLimpar;
     }
 }
 
