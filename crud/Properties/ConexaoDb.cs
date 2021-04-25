@@ -73,5 +73,26 @@ namespace crud.Properties
             }
         }
 
+        public bool verificaUsuario(string sql)
+        {
+            try
+            {
+                cn = new SqlConnection("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=CrudCsharp;Data Source=LAPTOP-BQIMSF2O\\SQLEXPRESS");
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(sql, cn);
+                cmd.CommandTimeout = 50000;
+                return Convert.ToBoolean(cmd.ExecuteScalar());
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                FecharConexao();
+            }
+        }
+
     }
 }

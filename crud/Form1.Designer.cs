@@ -46,7 +46,7 @@ namespace crud
             this.lblLogin.Name = "lblLogin";
             this.lblLogin.Size = new System.Drawing.Size(62, 24);
             this.lblLogin.TabIndex = 0;
-            this.lblLogin.Text = "Login:";
+            this.lblLogin.Text = "Email:";
             // 
             // btnLogar
             // 
@@ -117,7 +117,8 @@ namespace crud
             this.Controls.Add(this.btnLogar);
             this.Controls.Add(this.lblLogin);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Login";
             this.ResumeLayout(false);
             this.PerformLayout();
 

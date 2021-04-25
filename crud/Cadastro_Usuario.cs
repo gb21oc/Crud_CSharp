@@ -67,6 +67,7 @@ namespace crud
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             ConexaoDb conexaodb = new ConexaoDb();
+            HashPwd hashPwd = new HashPwd();
             try
             {
                 string sql = "";
@@ -79,10 +80,11 @@ namespace crud
                 {
                     if (confereCaracteresPerigosos(txtName.Text))
                     {
+                       string hashSenha = hashPwd.HashValue(txtSenha.Text);
                         sql = "INSERT INTO Crud_User(nome, email, senha) VALUES ( " +
                             "'" + txtName.Text + "', " +
                             "'" + txtEmail.Text + "', " +
-                            "'" + txtSenha.Text + "'" +
+                            "'" + hashSenha + "'" +
                             ")";
 
                         conexaodb.ExecutaQuery(sql);
@@ -107,6 +109,13 @@ namespace crud
                 LimparDados();
             }
             MessageBox.Show("Cadastro efetuado com sucesso!");
+        }
+
+        private void lblLogar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Form1 form1 = new Form1();
+            form1.Show();
+            Hide();
         }
     }
 }

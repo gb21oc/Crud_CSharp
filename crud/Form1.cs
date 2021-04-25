@@ -54,16 +54,24 @@ namespace crud
         private void btnLogar_Click(object sender, EventArgs e)
         {
             ConexaoDb conexaoDb = new ConexaoDb();
+            HashPwd hashPwd = new HashPwd();
             try
             {
                 string sql = "";
                 if (confereCaracteresPerigosos(txtLogin.Text))
                 {
-                    sql = "SELECT * FROM Crud_User WHERE (" + 
-                        "'" + txtLogin.Text + "', " +
-                        "'" + txtSenha.Text + "'" +
-                        ")";
-                    conexaoDb.ExecutaQuery(sql);
+                    string hashSenha = hashPwd.HashValue(txtSenha.Text);
+                    sql = "SELECT * FROM Crud_User WHERE " +
+                        "email = '" + txtLogin.Text + "' and " +
+                        "senha = '" + hashSenha + "'";
+                    if (conexaoDb.verificaUsuario(sql))
+                    {
+                        MessageBox.Show("Login bem sucedido");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Email ou senha errados");
+                    }
                 }
 
             }
