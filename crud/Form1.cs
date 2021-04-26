@@ -56,12 +56,18 @@ namespace crud
             ConexaoDb conexaoDb = new ConexaoDb();
             HashPwd hashPwd = new HashPwd();
             ModificaUser mdUser = new ModificaUser();
+            Util util = new Util();
             try
             {
                 string sql = "";
                 if (String.IsNullOrEmpty(txtLogin.Text) || String.IsNullOrEmpty(txtSenha.Text))
                 {
                     MessageBox.Show("Não é possivel logar com campos vazios");
+                    return;
+                }
+                if (!util.verificaEmail(txtLogin.Text))
+                {
+                    MessageBox.Show("Email Inválido!");
                     return;
                 }
                 if (confereCaracteresPerigosos(txtLogin.Text))

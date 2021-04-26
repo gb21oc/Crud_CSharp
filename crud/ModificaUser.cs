@@ -21,10 +21,7 @@ namespace crud
         {
             InitializeComponent();
             btnSalvar.Enabled = true;
-            if (permissao == "Comum")
-            {
-                btnSalvar.Enabled = false;
-            }
+            btnEnviarMsg.Enabled = false;
         }
 
         public void LimparDados()
@@ -42,6 +39,10 @@ namespace crud
 
         public void sqlPreencheDataGrid(string sql)
         {
+            if (permissao == "Comum")
+            {
+                lblUser.Text = "Suas informações(de dois cliques para editar)";
+            }
             ConexaoDb conexao = new ConexaoDb();
             DataTable tb = conexao.DataTable_ConsultarDados(sql);
             gridUser.DataSource = tb;
@@ -64,7 +65,10 @@ namespace crud
             gridUser.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             if (permissao == "Comum")
             {
+                ConexaoDb cb = new ConexaoDb();
                 sql = "SELECT id as ID, nome as NOME, email as 'E-MAIL', permissao as PERMISSAO FROM Crud_User WHERE email = " + "'" + emailLogin + "'";
+                string sqlCombo = "SELECT id as ID, nome as NOME, email as 'E-MAIL' FROM Crud_User WHERE PERMISSAO = 'Funcionario'";
+                cb.PreencherComboBox_KeyValue(cbFuncionario, sqlCombo);
                 sqlPreencheDataGrid(sql);
                 this.gridUser.Columns["ID"].Visible = false;
                 this.gridUser.Columns["PERMISSAO"].Visible = false;
@@ -77,7 +81,10 @@ namespace crud
             }
             if (permissao == "Funcionario")
             {
+                ConexaoDb cb = new ConexaoDb();
                 sql = "SELECT id as ID, nome as NOME, email as 'E-MAIL', permissao as PERMISSAO FROM Crud_User WHERE PERMISSAO = 'Funcionario' OR PERMISSAO = 'Comum'";
+                string sqlCombo = "SELECT id as ID, nome as NOME, email as 'E-MAIL' FROM Crud_User WHERE PERMISSAO = 'Funcionario'";
+                cb.PreencherComboBox_KeyValue(cbFuncionario, sqlCombo);
                 sqlPreencheDataGrid(sql);
                 this.gridUser.Columns["ID"].Visible = false;
                 this.gridUser.Columns["NOME"].Width = 130;
@@ -87,7 +94,14 @@ namespace crud
             }
             if (permissao == "Administrador")
             {
+                ConexaoDb cb = new ConexaoDb();
                 sql = "SELECT id as ID, nome as NOME, email as 'E-MAIL', permissao as PERMISSAO FROM Crud_User";
+                string sqlComboAdm = "SELECT id as ID, nome as NOME, email as 'E-MAIL' FROM Crud_User WHERE PERMISSAO = 'Administrador'";
+                string sqlComboFunc = "SELECT id as ID, nome as NOME, email as 'E-MAIL' FROM Crud_User WHERE PERMISSAO = 'Funcionario'";
+                string sqlComboComum = "SELECT id as ID, nome as NOME, email as 'E-MAIL' FROM Crud_User WHERE PERMISSAO = 'Comum'";
+                cb.PreencherComboBox_KeyValue(cbAdm, sqlComboAdm);
+                cb.PreencherComboBox_KeyValue(cbFuncionario, sqlComboFunc);
+                cb.PreencherComboBox_KeyValue(cbCliente, sqlComboComum);
                 sqlPreencheDataGrid(sql);
                 this.gridUser.Columns["ID"].Visible = false;
                 this.gridUser.Columns["NOME"].Width = 130;
@@ -111,17 +125,23 @@ namespace crud
                     case "Comum":
                         btnDeletar.Enabled = false;
                         cbPermissao.Enabled = false;
+                        cbAdm.Enabled = false;
+                        cbCliente.Enabled = false;
+                        btnCadastroDespesas.Enabled = true;
                         permissao = "Comum";
                         preencheDataGrid("Comum");
-                        //Datagrid só pode aparecer o seu perfil
                         break;
                     case "Funcionario":
                         cbPermissao.Items.Remove("Administrador");
                         permissao = "Funcionario";
+                        btnCadastroDespesas.Visible = false;
+                        btnCadastroDespesas.Enabled = false;
                         preencheDataGrid("Funcionario");
-                        //Só pode ver funcionarios
                         break;
                     case "Administrador":
+                        btnCadastroDespesas.Visible = false;
+                        btnCadastroDespesas.Enabled = false;
+                        preencheDataGrid("Administrador");
                         break;
                 }
             }
@@ -147,10 +167,12 @@ namespace crud
             {
                 btnDeletar.Enabled = true;
                 btnSalvar.Enabled = true;
+                btnEnviarMsg.Enabled = true;
             }
             else
             {
                 btnDeletar.Enabled = false;
+                btnEnviarMsg.Enabled = true;
             }
 
         }
@@ -195,20 +217,25 @@ namespace crud
             try
             {
                 ConexaoDb conexao = new ConexaoDb();
+                Util util = new Util();
                 string sql;
                 if (String.IsNullOrEmpty(txtNome_User.Text) || String.IsNullOrEmpty(txtEmail_User.Text))  
                 {
                     MessageBox.Show("Email ou Nome estão vazios e por isso não será possivel salvar!!!");
                     return;
                 }
-                else if(permissao == "Funcionario" || permissao == "Administrador")
+                if (!util.verificaEmail(txtEmail_User.Text)) {
+                    MessageBox.Show("Email Inválido!");
+                    return;
+                }
+                else if (permissao == "Funcionario" || permissao == "Administrador")
                 {
                     sql = "UPDATE Crud_User SET NOME = " + "'" + txtNome_User.Text + "'"
                     + ", EMAIL = " + "'" + txtEmail_User.Text + "'"
                     + ", PERMISSAO = " + "'" + cbPermissao.SelectedItem + "'"
                     + " WHERE ID = " + "'" + idAtual + "'";
                     conexao.ExecutaQuery(sql);
-                    preencheDataGrid(permissao);                        
+                    preencheDataGrid(permissao);
                 }
                 else
                 {
@@ -228,6 +255,59 @@ namespace crud
             {
                 LimparDados();
             }
+        }
+
+        private void btnEnviarMsg_Click(object sender, EventArgs e)
+        {
+            string nameFuncionario;
+            nameFuncionario = cbFuncionario.SelectedItem.ToString().Replace("[", "").Replace("]", "").Replace(",", "");
+            string[] nameFuncionarioSplit = nameFuncionario.Split(' ');
+            System.Console.WriteLine(nameFuncionarioSplit[1]);
+            System.Console.WriteLine(nameFuncionario[1]);
+            try
+            {
+                ConexaoDb conexao = new ConexaoDb();
+                Util util = new Util();
+                string sql;
+                if (String.IsNullOrEmpty(txtNome_User.Text) || String.IsNullOrEmpty(txtEmail_User.Text))
+                {
+                    MessageBox.Show("Email ou Nome estão vazios e por isso não será possivel salvar!!!");
+                    return;
+                }
+                if (!util.verificaEmail(txtEmail_User.Text))
+                {
+                    MessageBox.Show("Email Inválido!");
+                    return;
+                }
+                if (nameFuncionarioSplit[1] == " ")
+                {
+                    MessageBox.Show("Por favor selecione o funcionario!");
+                    return;
+                }
+                if (String.IsNullOrEmpty(txtNameMsg.Text) || String.IsNullOrEmpty(txtMsgSuporte.Text))
+                {
+                    MessageBox.Show("Titulo da mensagem ou o corpo não pode ficar vazio");
+                    return;
+                }
+                else
+                {
+                    sql = "INSERT INTO MensagemSuporte(id, email_user, nome_user, cargo_recebe_msg, nome_recebe_msg, titulo_msg, mensagem) VALUES(" +
+                    "'" + idAtual + "', " +
+                    "'" + txtEmail_User.Text + "', " +
+                    "'" + txtNome_User.Text + "', " +
+                    "'Funcionario', " +
+                    "'" + nameFuncionarioSplit[1] + "', " +
+                    "'" + txtNameMsg .Text + "', " +
+                    "'" + txtMsgSuporte.Text + "'" + ")";
+                    conexao.ExecutaQuery(sql);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return;
+            }
+            MessageBox.Show($"Mensagem enviada com sucesso para: {nameFuncionarioSplit[1]}");
         }
     }
 }

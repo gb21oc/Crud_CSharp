@@ -68,12 +68,18 @@ namespace crud
         {
             ConexaoDb conexaodb = new ConexaoDb();
             HashPwd hashPwd = new HashPwd();
+            Util util = new Util();
             try
             {
                 string sql = "";
                 if (String.IsNullOrEmpty(txtEmail.Text) || String.IsNullOrEmpty(txtName.Text) || String.IsNullOrEmpty(txtSenha.Text))
                 {
                     MessageBox.Show("Algum campo ficou vazio, não sera possivel efetuar o cadastro!");
+                    return;
+                }
+                if (!util.verificaEmail(txtEmail.Text))
+                {
+                    MessageBox.Show("Email Inválido!");
                     return;
                 }
                 if (confereCaracteresPerigosos(txtEmail.Text))

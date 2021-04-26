@@ -44,8 +44,8 @@ namespace crud.Properties
             }
             catch (SqlException ex)
             {
-                //MessageBox.Show("Ocorreu um erro");
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Ocorreu um erro");
+                //MessageBox.Show(ex.ToString());
             }
             finally
             {
@@ -77,7 +77,8 @@ namespace crud.Properties
             }
             catch (SqlException ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
+                MessageBox.Show("Ocorre um erro");
                 return;
             }
             finally
@@ -98,7 +99,7 @@ namespace crud.Properties
             }
             catch (SqlException ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Ocorre um erro");
                 return false;
             }
             finally
@@ -130,8 +131,8 @@ namespace crud.Properties
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString()).ToString();
-                result = ex.ToString();
+                MessageBox.Show("Ocorre um erro");
+                result = "Ocorre um erro";
                 return result;
             }
             finally
@@ -139,6 +140,34 @@ namespace crud.Properties
                 FecharConexao();
             }
             return result;
+        }
+
+        public void PreencherComboBox_KeyValue(ComboBox cmb, string sql)
+        {
+            try {
+                ConexaoDb conexao = new ConexaoDb();
+
+                SqlDataReader dr = conexao.Reader_ConsultarDados(sql);
+                Dictionary<string, string> itens = new Dictionary<string, string>();
+
+                //INSERE UMA LINHA VAZIA   
+                itens.Add("", "");
+                while (dr.Read())
+                {
+                    itens.Add(dr.GetValue(0).ToString(), dr.GetValue(1).ToString());
+                }
+                FecharConexao();
+                cmb.DataSource = new BindingSource(itens, null);
+                cmb.AutoCompleteMode = AutoCompleteMode.Append;
+                cmb.AutoCompleteSource = AutoCompleteSource.ListItems;
+                cmb.DisplayMember = "Value";
+                cmb.ValueMember = "Key";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro");
+            }
+            
         }
 
     }
