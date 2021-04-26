@@ -22,7 +22,6 @@ namespace crud
             {
                 hashValue.AppendFormat(CultureInfo.InvariantCulture, "{0:X2}", b);
             }
-            System.Console.WriteLine(hashValue.ToString());
             return hashValue.ToString();
         }
     }

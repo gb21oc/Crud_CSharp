@@ -55,9 +55,15 @@ namespace crud
         {
             ConexaoDb conexaoDb = new ConexaoDb();
             HashPwd hashPwd = new HashPwd();
+            ModificaUser mdUser = new ModificaUser();
             try
             {
                 string sql = "";
+                if (String.IsNullOrEmpty(txtLogin.Text) || String.IsNullOrEmpty(txtSenha.Text))
+                {
+                    MessageBox.Show("Não é possivel logar com campos vazios");
+                    return;
+                }
                 if (confereCaracteresPerigosos(txtLogin.Text))
                 {
                     string hashSenha = hashPwd.HashValue(txtSenha.Text);
@@ -67,10 +73,14 @@ namespace crud
                     if (conexaoDb.verificaUsuario(sql))
                     {
                         MessageBox.Show("Login bem sucedido");
+                        mdUser.verificaPermissaoUser(txtLogin.Text, hashSenha);
+                        mdUser.Show();
+                        Hide();
+                        
                     }
                     else
                     {
-                        MessageBox.Show("Email ou senha errados");
+                        MessageBox.Show("Email ou senha errados ou este usuario não foi cadastrado");
                     }
                 }
 
