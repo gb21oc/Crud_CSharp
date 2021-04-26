@@ -41,7 +41,7 @@ namespace crud
         {
             if (permissao == "Comum")
             {
-                lblUser.Text = "Suas informações(de dois cliques para editar)";
+                lblUser.Text = "Suas informações(de dois cliques para editar ou para abrir um chamado)";
             }
             ConexaoDb conexao = new ConexaoDb();
             DataTable tb = conexao.DataTable_ConsultarDados(sql);
