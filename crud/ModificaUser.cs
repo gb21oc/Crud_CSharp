@@ -83,7 +83,9 @@ namespace crud
             {
                 ConexaoDb cb = new ConexaoDb();
                 sql = "SELECT id as ID, nome as NOME, email as 'E-MAIL', permissao as PERMISSAO FROM Crud_User WHERE PERMISSAO = 'Funcionario' OR PERMISSAO = 'Comum'";
+                string sqlComboAdm = "SELECT id as ID, nome as NOME, email as 'E-MAIL' FROM Crud_User WHERE PERMISSAO = 'Administrador'";
                 string sqlCombo = "SELECT id as ID, nome as NOME, email as 'E-MAIL' FROM Crud_User WHERE PERMISSAO = 'Funcionario'";
+                cb.PreencherComboBox_KeyValue(cbAdm, sqlComboAdm);
                 cb.PreencherComboBox_KeyValue(cbFuncionario, sqlCombo);
                 sqlPreencheDataGrid(sql);
                 this.gridUser.Columns["ID"].Visible = false;
