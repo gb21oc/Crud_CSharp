@@ -80,6 +80,7 @@ namespace crud
                     {
                         MessageBox.Show("Login bem sucedido");
                         mdUser.verificaPermissaoUser(txtLogin.Text, hashSenha);
+                        mdUser.Closed += (s, args) => this.Close();
                         mdUser.Show();
                         Hide();
                         
@@ -104,6 +105,7 @@ namespace crud
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Cadastro_Usuario cadastro = new Cadastro_Usuario();
+            cadastro.Closed += (s, args) => this.Close();
             cadastro.Show();
             Hide();
         }

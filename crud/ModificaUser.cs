@@ -32,6 +32,7 @@ namespace crud
             txtNameMsg.Text             = "";
             cbPermissao.SelectedItem    = null;
             btnDeletar.Enabled          = false;
+            btnEnviarMsg.Enabled = false;
             if (permissao == "Comum") {
                 btnSalvar.Enabled = false;
             }
@@ -138,11 +139,15 @@ namespace crud
                     case "Funcionario":
                         cbPermissao.Items.Remove("Administrador");
                         permissao = "Funcionario";
+                        btnDeletar.Enabled = false;
+                        btnEnviarMsg.Enabled = false;
                         btnCadastroDespesas.Visible = false;
                         btnCadastroDespesas.Enabled = false;
                         preencheDataGrid("Funcionario");
                         break;
                     case "Administrador":
+                        btnDeletar.Enabled = false;
+                        btnEnviarMsg.Enabled = false;
                         btnCadastroDespesas.Visible = false;
                         btnCadastroDespesas.Enabled = false;
                         preencheDataGrid("Administrador");
@@ -266,8 +271,6 @@ namespace crud
             string nameFuncionario;
             nameFuncionario = cbFuncionario.SelectedItem.ToString().Replace("[", "").Replace("]", "").Replace(",", "");
             string[] nameFuncionarioSplit = nameFuncionario.Split(' ');
-            System.Console.WriteLine(nameFuncionarioSplit[1]);
-            System.Console.WriteLine(nameFuncionario[1]);
             try
             {
                 ConexaoDb conexao = new ConexaoDb();
