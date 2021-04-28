@@ -16,7 +16,7 @@ namespace crud.Properties
 
         public ConexaoDb() //Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=CrudCsharp;Data Source=*\\*
         {
-            cn = new SqlConnection("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=master;Data Source=WKT-0065D\\SQLEXPRESS");
+            cn = new SqlConnection("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=master;Data Source=*");
             cn.Open();
         }
 
@@ -28,7 +28,7 @@ namespace crud.Properties
 
         public DataTable DataTable_ConsultarDados(string sql)
         {
-            cn = new SqlConnection("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=master;Data Source=WKT-0065D\\SQLEXPRESS");
+            cn = new SqlConnection("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=master;Data Source=*");
             cn.Open();
             DataTable td = new DataTable();
             //Executa a consulta no db
