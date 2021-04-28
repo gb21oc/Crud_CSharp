@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace crud
 {
-    public partial class Chamados : Form
+    public partial class Chat : Form
     {
-        public Chamados()
+        public Chat()
         {
             InitializeComponent();
         }

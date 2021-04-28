@@ -1,7 +1,7 @@
 ﻿
 namespace crud
 {
-    partial class Chamados
+    partial class Chat
     {
         /// <summary>
         /// Required designer variable.

@@ -71,11 +71,17 @@
     <Compile Include="Cadastro_Usuario.Designer.cs">
       <DependentUpon>Cadastro_Usuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Chamados.cs">
+    <Compile Include="Chat.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Chamados.Designer.cs">
-      <DependentUpon>Chamados.cs</DependentUpon>
+    <Compile Include="Chat.Designer.cs">
+      <DependentUpon>Chat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Despesas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Despesas.Designer.cs">
+      <DependentUpon>Despesas.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -95,6 +101,9 @@
     <Compile Include="Util.cs" />
     <EmbeddedResource Include="Cadastro_Usuario.resx">
       <DependentUpon>Cadastro_Usuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Despesas.resx">
+      <DependentUpon>Despesas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

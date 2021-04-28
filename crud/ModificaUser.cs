@@ -20,29 +20,23 @@ namespace crud
         public ModificaUser()
         {
             InitializeComponent();
-            btnSalvar.Enabled = true;
-            btnEnviarMsg.Enabled = false;
+            btnSalvar.Enabled = false;
         }
 
         public void LimparDados()
         {
             txtNome_User.Text           = "";
             txtEmail_User.Text          = "";
-            txtMsgSuporte.Text          = "";
-            txtNameMsg.Text             = "";
             cbPermissao.SelectedItem    = null;
             btnDeletar.Enabled          = false;
-            btnEnviarMsg.Enabled = false;
-            if (permissao == "Comum") {
-                btnSalvar.Enabled = false;
-            }
+            btnSalvar.Enabled           = false;
         }
 
         public void sqlPreencheDataGrid(string sql)
         {
             if (permissao == "Comum")
             {
-                lblUser.Text = "Suas informações(de dois cliques para editar ou para abrir um chamado)";
+                lblUser.Text = "Suas informações(de dois cliques para editar)";
             }
             ConexaoDb conexao = new ConexaoDb();
             DataTable tb = conexao.DataTable_ConsultarDados(sql);
@@ -131,6 +125,7 @@ namespace crud
                         btnDeletar.Enabled = false;
                         cbPermissao.Enabled = false;
                         cbAdm.Enabled = false;
+                        cbFuncionario.Enabled = false;
                         cbCliente.Enabled = false;
                         btnCadastroDespesas.Enabled = true;
                         permissao = "Comum";
@@ -140,14 +135,12 @@ namespace crud
                         cbPermissao.Items.Remove("Administrador");
                         permissao = "Funcionario";
                         btnDeletar.Enabled = false;
-                        btnEnviarMsg.Enabled = false;
                         btnCadastroDespesas.Visible = false;
                         btnCadastroDespesas.Enabled = false;
                         preencheDataGrid("Funcionario");
                         break;
                     case "Administrador":
                         btnDeletar.Enabled = false;
-                        btnEnviarMsg.Enabled = false;
                         btnCadastroDespesas.Visible = false;
                         btnCadastroDespesas.Enabled = false;
                         preencheDataGrid("Administrador");
@@ -176,12 +169,11 @@ namespace crud
             {
                 btnDeletar.Enabled = true;
                 btnSalvar.Enabled = true;
-                btnEnviarMsg.Enabled = true;
             }
             else
             {
                 btnDeletar.Enabled = false;
-                btnEnviarMsg.Enabled = true;
+                btnSalvar.Enabled = true;
             }
 
         }
@@ -266,55 +258,16 @@ namespace crud
             }
         }
 
-        private void btnEnviarMsg_Click(object sender, EventArgs e)
+        private void btnCadastroDespesas_Click(object sender, EventArgs e)
         {
-            string nameFuncionario;
-            nameFuncionario = cbFuncionario.SelectedItem.ToString().Replace("[", "").Replace("]", "").Replace(",", "");
-            string[] nameFuncionarioSplit = nameFuncionario.Split(' ');
-            try
-            {
-                ConexaoDb conexao = new ConexaoDb();
-                Util util = new Util();
-                string sql;
-                if (String.IsNullOrEmpty(txtNome_User.Text) || String.IsNullOrEmpty(txtEmail_User.Text))
-                {
-                    MessageBox.Show("Email ou Nome estão vazios e por isso não será possivel salvar!!!");
-                    return;
-                }
-                if (!util.verificaEmail(txtEmail_User.Text))
-                {
-                    MessageBox.Show("Email Inválido!");
-                    return;
-                }
-                if (nameFuncionarioSplit[1] == " ")
-                {
-                    MessageBox.Show("Por favor selecione o funcionario!");
-                    return;
-                }
-                if (String.IsNullOrEmpty(txtNameMsg.Text) || String.IsNullOrEmpty(txtMsgSuporte.Text))
-                {
-                    MessageBox.Show("Titulo da mensagem ou o corpo não pode ficar vazio");
-                    return;
-                }
-                else
-                {
-                    sql = "INSERT INTO MensagemSuporte(id, email_user, nome_user, cargo_recebe_msg, nome_recebe_msg, titulo_msg, mensagem) VALUES(" +
-                    "'" + idAtual + "', " +
-                    "'" + txtEmail_User.Text + "', " +
-                    "'" + txtNome_User.Text + "', " +
-                    "'Funcionario', " +
-                    "'" + nameFuncionarioSplit[1] + "', " +
-                    "'" + txtNameMsg .Text + "', " +
-                    "'" + txtMsgSuporte.Text + "'" + ")";
-                    conexao.ExecutaQuery(sql);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-                return;
-            }
-            MessageBox.Show($"Mensagem enviada com sucesso para: {nameFuncionarioSplit[1]}");
+            Despesas despesas = new Despesas();
+            despesas.ShowDialog();
+        }
+
+        private void btnChamados_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(this, "Chat inativo no momento");
+            return;
         }
     }
 }
