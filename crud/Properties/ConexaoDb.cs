@@ -44,8 +44,8 @@ namespace crud.Properties
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("Ocorreu um erro");
-                //MessageBox.Show(ex.ToString());
+                //MessageBox.Show("Ocorreu um erro");
+                MessageBox.Show(ex.ToString());
             }
             finally
             {

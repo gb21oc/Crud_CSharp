@@ -98,7 +98,7 @@ namespace crud
                         }
                         if (row.Cells["DESCRICAO"].Value != "" || row.Cells["VALOR"].Value != "")
                         {
-                            sql = "INSERT INTO DESPESAS(MES, DESCRICAO, VALOR) VALUES(" +
+                            sql = "INSERT INTO GASTOS(MES, DESCRICAO, VALOR) VALUES(" +
                                 "'" + cbDespesasMeses.SelectedItem + "', " +
                                 "'" + row.Cells["DESCRICAO"].Value + "', " +
                                 "'" + row.Cells["VALOR"].Value + "'" +
@@ -117,62 +117,61 @@ namespace crud
                 MessageBox.Show("Ocorreu um erro");
             }
         }
-       
-        private void cbDespesasMeses_MouseClick(object sender, MouseEventArgs e)
-        {
-            //string sql;
-            //switch (cbDespesasMeses.SelectedItem)
-            //{
-            //    case "Janeiro":
-            //        sql = "SELECT * FROM DESPESAS WHERE MES = 'Janeiro'";
-            //        sqlPreencheDataGrid(sql);
-            //        break;
-            //    case "Fevereiro":
-            //        sql = "SELECT * FROM DESPESAS WHERE MES = 'Fevereiro'";
-            //        sqlPreencheDataGrid(sql);
-            //        break;
-            //    case "Março":
-            //        sql = "SELECT * FROM DESPESAS WHERE MES = 'Março'";
-            //        sqlPreencheDataGrid(sql);
-            //        break;
-            //    case "Abril":
-            //        sql = "SELECT * FROM DESPESAS WHERE MES = 'Abril'";
-            //        sqlPreencheDataGrid(sql);
-            //        break;
-            //    case "Maio":
-            //        sql = "SELECT * FROM DESPESAS WHERE MES = 'Maio'";
-            //        sqlPreencheDataGrid(sql);
-            //        break;
-            //    case "Junho":
-            //        sql = "SELECT * FROM DESPESAS WHERE MES = 'Junho'";
-            //        sqlPreencheDataGrid(sql);
-            //        break;
-            //    case "Julho":
-            //        sql = "SELECT * FROM DESPESAS WHERE MES = 'Julho'";
-            //        sqlPreencheDataGrid(sql);
-            //        break;
-            //    case "Agosto":
-            //        sql = "SELECT * FROM DESPESAS WHERE MES = 'Agosto'";
-            //        sqlPreencheDataGrid(sql);
-            //        break;
-            //    case "Setembro":
-            //        sql = "SELECT * FROM DESPESAS WHERE MES = 'Setembro'";
-            //        sqlPreencheDataGrid(sql);
-            //        break;
-            //    case "Outubro":
-            //        sql = "SELECT * FROM DESPESAS WHERE MES = 'Outubro'";
-            //        sqlPreencheDataGrid(sql);
-            //        break;
-            //    case "Novembro":
-            //        sql = "SELECT * FROM DESPESAS WHERE MES = 'Novembro'";
-            //        sqlPreencheDataGrid(sql);
-            //        break;
-            //    case "Dezembro":
-            //        sql = "SELECT * FROM DESPESAS WHERE MES = 'Dezembro'";
-            //        sqlPreencheDataGrid(sql);
-            //        break;
-            //}
-        }
 
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            string sql;
+            switch (cbDespesasMeses.SelectedItem)
+            {
+                case "Janeiro":
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Janeiro'";
+                    sqlPreencheDataGrid(sql);
+                    break;
+                case "Fevereiro":
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Fevereiro'";
+                    sqlPreencheDataGrid(sql);
+                    break;
+                case "Março":
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Março'";
+                    sqlPreencheDataGrid(sql);
+                    break;
+                case "Abril":
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Abril'";
+                    sqlPreencheDataGrid(sql);
+                    break;
+                case "Maio":
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Maio'";
+                    sqlPreencheDataGrid(sql);
+                    break;
+                case "Junho":
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Junho'";
+                    sqlPreencheDataGrid(sql);
+                    break;
+                case "Julho":
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Julho'";
+                    sqlPreencheDataGrid(sql);
+                    break;
+                case "Agosto":
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Agosto'";
+                    sqlPreencheDataGrid(sql);
+                    break;
+                case "Setembro":
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Setembro'";
+                    sqlPreencheDataGrid(sql);
+                    break;
+                case "Outubro":
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Outubro'";
+                    sqlPreencheDataGrid(sql);
+                    break;
+                case "Novembro":
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Novembro'";
+                    sqlPreencheDataGrid(sql);
+                    break;
+                case "Dezembro":
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Dezembro'";
+                    sqlPreencheDataGrid(sql);
+                    break;
+            }
+        }
     }
 }
