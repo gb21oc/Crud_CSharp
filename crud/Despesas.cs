@@ -81,6 +81,9 @@ namespace crud
         {
             try
             {
+                //lblTotalMes.Text = txtGanhosRecebidos.Text;
+                btnAdcLinha.Enabled = true;
+                btnRmvLinha.Enabled = true;
                 string sql;
                 if (cbDespesasMeses.SelectedItem == null)
                 {
@@ -114,12 +117,27 @@ namespace crud
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu um erro");
+                MessageBox.Show(ex.ToString());
             }
         }
 
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
+            if (txtGanhosRecebidos.Text == "" || txtGanhosRecebidos.Text == "0")
+            {
+                lblTotalMes.Text = "0";
+            }
+            if (cbDespesasMeses.SelectedItem == null)
+            {
+                MessageBox.Show("Não é possivel pesquisar as despesas com o campo 'Mes' vazio!!!");
+                btnAdcLinha.Enabled = false;
+                btnRmvLinha.Enabled = false;
+                btnEnviar.Enabled = false;
+                return;
+            }
+            btnEnviar.Enabled = false;
+            btnAdcLinha.Enabled = false;
+            btnRmvLinha.Enabled = false;
             string sql;
             switch (cbDespesasMeses.SelectedItem)
             {
@@ -172,6 +190,14 @@ namespace crud
                     sqlPreencheDataGrid(sql);
                     break;
             }
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            InitializeGridDespesas();
+            cbDespesasMeses.SelectedItem = null;
+            btnAdcLinha.Enabled = false;
+            btnRmvLinha.Enabled = false;
         }
     }
 }
