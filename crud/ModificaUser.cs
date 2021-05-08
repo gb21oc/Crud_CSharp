@@ -21,6 +21,25 @@ namespace crud
         {
             InitializeComponent();
             btnSalvar.Enabled = false;
+            lblSalarioUpdate.Visible = false;
+            txtSalarioUpdate.Visible = false;
+        }
+
+        public void preencheSalario(string emailLogin)
+        {
+            string sql;
+            ConexaoDb conexao = new ConexaoDb();
+            try 
+            {
+                sql = "SELECT SALARIO FROM Crud_User where email = " + "'"+ emailLogin  + "'";
+                string result = conexao.resultLabel(sql);
+                System.Console.WriteLine(result);
+                lblSalario.Text = result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         public void LimparDados()
@@ -30,6 +49,8 @@ namespace crud
             cbPermissao.SelectedItem    = null;
             btnDeletar.Enabled          = false;
             btnSalvar.Enabled           = false;
+            lblSalarioUpdate.Visible          = false;
+            txtSalarioUpdate.Visible    = false;
         }
 
         public void sqlPreencheDataGrid(string sql)
@@ -61,7 +82,8 @@ namespace crud
             if (permissao == "Comum")
             {
                 ConexaoDb cb = new ConexaoDb();
-                sql = "SELECT id as ID, nome as NOME, email as 'E-MAIL', permissao as PERMISSAO FROM Crud_User WHERE email = " + "'" + emailLogin + "'";
+                sql = "SELECT id as ID, nome as NOME, email as 'E-MAIL', permissao as PERMISSAO, salario as SALARIO FROM Crud_User WHERE email = " + "'" + emailLogin + "'";
+                preencheSalario(emailLogin);
                 string sqlCombo = "SELECT id as ID, nome as NOME, email as 'E-MAIL' FROM Crud_User WHERE PERMISSAO = 'Funcionario'";
                 cb.PreencherComboBox_KeyValue(cbFuncionario, sqlCombo);
                 sqlPreencheDataGrid(sql);
@@ -69,6 +91,7 @@ namespace crud
                 this.gridUser.Columns["PERMISSAO"].Visible = false;
                 this.gridUser.Columns["NOME"].Width = 138;
                 this.gridUser.Columns["E-MAIL"].Width = 138;
+                this.gridUser.Columns["SALARIO"].Visible = false;
                 gridUser.Width = 320;
                 gridUser.Height = 60;
 
@@ -164,6 +187,7 @@ namespace crud
             txtNome_User.Text = gridUser.Rows[e.RowIndex].Cells["NOME"].Value.ToString();
             txtEmail_User.Text = gridUser.Rows[e.RowIndex].Cells["E-MAIL"].Value.ToString();
             cbPermissao.SelectedItem = gridUser.Rows[e.RowIndex].Cells["PERMISSAO"].Value.ToString();
+            txtSalarioUpdate.Text = gridUser.Rows[e.RowIndex].Cells["SALARIO"].Value.ToString();
             verificaDoubleClick = true;
             if (permissao == "Funcionario" || permissao == "Administrador" && verificaDoubleClick)
             {
@@ -172,6 +196,8 @@ namespace crud
             }
             else
             {
+                txtSalarioUpdate.Visible = true;
+                lblSalarioUpdate.Visible = true;
                 btnDeletar.Enabled = false;
                 btnSalvar.Enabled = true;
             }

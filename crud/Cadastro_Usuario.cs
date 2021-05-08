@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace crud
 {
@@ -21,9 +22,10 @@ namespace crud
 
         public void LimparDados()
         {
-            txtEmail.Text = "";
-            txtName.Text = "";
-            txtSenha.Text = "";
+            txtEmail.Text       = "";
+            txtName.Text        = "";
+            txtSenha.Text       = "";
+            txtSalario.Text     = "";
         }
 
         public bool confereCaracteresPerigosos(string input)
@@ -69,9 +71,18 @@ namespace crud
             ConexaoDb conexaodb = new ConexaoDb();
             HashPwd hashPwd = new HashPwd();
             Util util = new Util();
+            string verificaNumero = "^[0-9]";
             try
             {
                 string sql = "";
+                string recebeSalario = txtSalario.Text;
+                recebeSalario = recebeSalario.Replace(",", ".");
+                char charac = recebeSalario.ToCharArray()[0];
+                int verificaSequencia = charac * 11;
+                if (verificaSequencia.ToString() == txtSalario.Text)
+                {
+                    MessageBox.Show("Essa sequencia do campo de salário não é permitida");
+                }
                 if (String.IsNullOrEmpty(txtEmail.Text) || String.IsNullOrEmpty(txtName.Text) || String.IsNullOrEmpty(txtSenha.Text))
                 {
                     MessageBox.Show("Algum campo ficou vazio, não sera possivel efetuar o cadastro!");
@@ -82,15 +93,21 @@ namespace crud
                     MessageBox.Show("Email Inválido!");
                     return;
                 }
+                if (!Regex.IsMatch(txtSalario.Text, verificaNumero))
+                {
+                    MessageBox.Show("Só é permitido numeros no campo de salário");
+                    return;
+                }
                 if (confereCaracteresPerigosos(txtEmail.Text))
                 {
                     if (confereCaracteresPerigosos(txtName.Text))
                     {
                        string hashSenha = hashPwd.HashValue(txtSenha.Text);
-                        sql = "INSERT INTO Crud_User(nome, email, senha) VALUES ( " +
+                        sql = "INSERT INTO Crud_User(nome, email, senha, salario) VALUES ( " +
                             "'" + txtName.Text + "', " +
                             "'" + txtEmail.Text + "', " +
-                            "'" + hashSenha + "'" +
+                            "'" + hashSenha + "', " +
+                            "" + recebeSalario + "" +
                             ")";
 
                         conexaodb.ExecutaQuery(sql);
@@ -104,6 +121,7 @@ namespace crud
                 {
                     return;
                 }
+                MessageBox.Show("Cadastro efetuado com sucesso!");
             }
             catch (Exception ex)
             {
@@ -114,7 +132,6 @@ namespace crud
             {
                 LimparDados();
             }
-            MessageBox.Show("Cadastro efetuado com sucesso!");
         }
 
         private void lblLogar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -122,6 +139,14 @@ namespace crud
             Form1 form1 = new Form1();
             form1.Show();
             Hide();
+        }
+
+        private void txtSalario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != ',')
+            {
+                e.Handled = true; //ler sobre
+            }
         }
     }
 }

@@ -87,6 +87,10 @@ namespace crud
             this.label9 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.txtSalarioUpdate = new System.Windows.Forms.TextBox();
+            this.lblSalarioUpdate = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.lblSalario = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridUser)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -680,11 +684,49 @@ namespace crud
             this.label4.TabIndex = 30;
             this.label4.Text = "Janeiro:";
             // 
+            // txtSalarioUpdate
+            // 
+            this.txtSalarioUpdate.Location = new System.Drawing.Point(76, 64);
+            this.txtSalarioUpdate.Name = "txtSalarioUpdate";
+            this.txtSalarioUpdate.Size = new System.Drawing.Size(105, 20);
+            this.txtSalarioUpdate.TabIndex = 31;
+            // 
+            // lblSalarioUpdate
+            // 
+            this.lblSalarioUpdate.AutoSize = true;
+            this.lblSalarioUpdate.Location = new System.Drawing.Point(31, 68);
+            this.lblSalarioUpdate.Name = "lblSalarioUpdate";
+            this.lblSalarioUpdate.Size = new System.Drawing.Size(42, 13);
+            this.lblSalarioUpdate.TabIndex = 30;
+            this.lblSalarioUpdate.Text = "Salario:";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(12, 104);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(67, 13);
+            this.label23.TabIndex = 33;
+            this.label23.Text = "Seu Salario: ";
+            // 
+            // lblSalario
+            // 
+            this.lblSalario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSalario.ForeColor = System.Drawing.Color.Lime;
+            this.lblSalario.Location = new System.Drawing.Point(85, 104);
+            this.lblSalario.Name = "lblSalario";
+            this.lblSalario.Size = new System.Drawing.Size(72, 13);
+            this.lblSalario.TabIndex = 34;
+            // 
             // ModificaUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(878, 493);
+            this.Controls.Add(this.lblSalario);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.txtSalarioUpdate);
+            this.Controls.Add(this.lblSalarioUpdate);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnChamados);
             this.Controls.Add(this.btnCadastroDespesas);
@@ -776,5 +818,9 @@ namespace crud
         private System.Windows.Forms.Label lblDtJan;
         private System.Windows.Forms.Label lblValorDezembro;
         private System.Windows.Forms.Label lblValorNovembro;
+        private System.Windows.Forms.TextBox txtSalarioUpdate;
+        private System.Windows.Forms.Label lblSalarioUpdate;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label lblSalario;
     }
 }

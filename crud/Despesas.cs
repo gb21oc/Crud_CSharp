@@ -121,12 +121,14 @@ namespace crud
             }
         }
 
+        
+
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
-            if (txtGanhosRecebidos.Text == "" || txtGanhosRecebidos.Text == "0")
-            {
-                lblTotalMes.Text = "0";
-            }
+            //if (txtGanhosRecebidos.Text == "" || txtGanhosRecebidos.Text == "0")
+            //{
+            //    lblTotalMes.Text = "0";
+            //}
             if (cbDespesasMeses.SelectedItem == null)
             {
                 MessageBox.Show("Não é possivel pesquisar as despesas com o campo 'Mes' vazio!!!");

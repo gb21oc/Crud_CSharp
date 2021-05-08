@@ -30,8 +30,6 @@ namespace crud
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtGanhosRecebidos = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.btnEnviar = new System.Windows.Forms.Button();
@@ -48,37 +46,19 @@ namespace crud
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.txtGanhosRecebidos);
-            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnLimpar);
             this.groupBox1.Controls.Add(this.btnPesquisar);
             this.groupBox1.Controls.Add(this.btnEnviar);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(450, 77);
+            this.groupBox1.Size = new System.Drawing.Size(450, 64);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
             // 
-            // txtGanhosRecebidos
-            // 
-            this.txtGanhosRecebidos.Location = new System.Drawing.Point(102, 11);
-            this.txtGanhosRecebidos.Name = "txtGanhosRecebidos";
-            this.txtGanhosRecebidos.Size = new System.Drawing.Size(136, 20);
-            this.txtGanhosRecebidos.TabIndex = 6;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(22, 15);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 13);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Quanto ganhei:";
-            // 
             // btnLimpar
             // 
-            this.btnLimpar.Location = new System.Drawing.Point(287, 12);
+            this.btnLimpar.Location = new System.Drawing.Point(196, 13);
             this.btnLimpar.Name = "btnLimpar";
             this.btnLimpar.Size = new System.Drawing.Size(76, 29);
             this.btnLimpar.TabIndex = 4;
@@ -88,7 +68,7 @@ namespace crud
             // 
             // btnPesquisar
             // 
-            this.btnPesquisar.Location = new System.Drawing.Point(369, 9);
+            this.btnPesquisar.Location = new System.Drawing.Point(280, 13);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(76, 29);
             this.btnPesquisar.TabIndex = 3;
@@ -98,7 +78,7 @@ namespace crud
             // 
             // btnEnviar
             // 
-            this.btnEnviar.Location = new System.Drawing.Point(369, 42);
+            this.btnEnviar.Location = new System.Drawing.Point(365, 13);
             this.btnEnviar.Name = "btnEnviar";
             this.btnEnviar.Size = new System.Drawing.Size(76, 29);
             this.btnEnviar.TabIndex = 2;
@@ -123,7 +103,7 @@ namespace crud
             "Outubro",
             "Novembro",
             "Dezembro"});
-            this.cbDespesasMeses.Location = new System.Drawing.Point(113, 53);
+            this.cbDespesasMeses.Location = new System.Drawing.Point(53, 29);
             this.cbDespesasMeses.Name = "cbDespesasMeses";
             this.cbDespesasMeses.Size = new System.Drawing.Size(136, 21);
             this.cbDespesasMeses.TabIndex = 1;
@@ -131,7 +111,7 @@ namespace crud
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(47, 56);
+            this.label1.Location = new System.Drawing.Point(20, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(30, 13);
             this.label1.TabIndex = 0;
@@ -200,7 +180,6 @@ namespace crud
             this.Name = "Despesas";
             this.Text = "Despesas";
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridDespesas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -220,7 +199,5 @@ namespace crud
         private System.Windows.Forms.Button btnLimpar;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTotalMes;
-        private System.Windows.Forms.TextBox txtGanhosRecebidos;
-        private System.Windows.Forms.Label label4;
     }
 }
