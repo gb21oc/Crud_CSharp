@@ -38,7 +38,7 @@ namespace crud
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu um erro quando foi preencher o salario");
+                MessageBox.Show(this, "Ocorreu um erro quando foi preencher o salario", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -49,9 +49,10 @@ namespace crud
             cbPermissao.SelectedItem    = null;
             btnDeletar.Enabled          = false;
             btnSalvar.Enabled           = false;
-            lblSalarioUpdate.Visible          = false;
+            lblSalarioUpdate.Visible    = false;
             txtSalarioUpdate.Visible    = false;
             btnCadastroDespesas.Enabled = false;
+            btnAbrirChamado.Enabled     = false;
         }
 
         public void sqlPreencheDataGrid(string sql)
@@ -154,36 +155,50 @@ namespace crud
                         lblPermissao.Visible        = false;
                         cbAdm.Visible               = false;
                         cbCliente.Visible           = false;
+                        lblChamados.Visible         = false;
+                        lblQtdChamados.Visible      = false;
                         btnDeletar.Enabled          = false;
                         cbPermissao.Enabled         = false;
                         cbAdm.Enabled               = false;
                         cbFuncionario.Enabled       = false;
                         cbCliente.Enabled           = false;
                         btnCadastroDespesas.Enabled = false;
+                        btnAbrirChamado.Enabled     = false;
+                        btnChamados.Enabled         = false;
+                        btnChamados.Location        = new Point(709, 66);
                         permissao = "Comum";
                         preencheDataGrid("Comum");
                         break;
                     case "Funcionario":
                         cbPermissao.Items.Remove("Administrador");
                         permissao = "Funcionario";
-                        btnDeletar.Enabled = false;
-                        btnCadastroDespesas.Visible = false;
-                        btnCadastroDespesas.Enabled = false;
-                        lblCadastrarDespesas.Visible = false;
+                        btnCadastroDespesas.Visible     = false;
+                        btnChamados.Visible             = true;
+                        btnAbrirChamado.Visible         = false;
+                        lblCadastrarDespesas.Visible    = false;
+                        gbGastosMensais.Visible         = false;
+                        lblSeuSalario.Visible           = false;
+                        btnCadastroDespesas.Enabled     = false;
+                        btnDeletar.Enabled              = false;
+
                         preencheDataGrid("Funcionario");
                         break;
                     case "Administrador":
-                        lblCadastrarDespesas.Visible = false;
-                        btnDeletar.Enabled = false;
-                        btnCadastroDespesas.Visible = false;
-                        btnCadastroDespesas.Enabled = false;
+                        lblCadastrarDespesas.Visible    = false;
+                        btnAbrirChamado.Visible         = false;
+                        btnCadastroDespesas.Visible     = false;
+                        gbGastosMensais.Visible         = false;
+                        lblSeuSalario.Visible           = false;
+                        btnDeletar.Enabled              = false;
+                        btnCadastroDespesas.Enabled     = false;
+                        
                         preencheDataGrid("Administrador");
                         break;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu um erro na validação");
+                MessageBox.Show(this, "Ocorreu um erro na validação", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             finally
@@ -212,6 +227,9 @@ namespace crud
                 lblSalarioUpdate.Visible = true;
                 btnDeletar.Enabled = false;
                 btnSalvar.Enabled = true;
+                btnAbrirChamado.Enabled = true;
+                cbFuncionario.Enabled = true;
+                btnChamados.Enabled = true;
             }
 
         }
@@ -226,7 +244,7 @@ namespace crud
             try {
                 if (String.IsNullOrEmpty(txtNome_User.Text) || String.IsNullOrEmpty(txtEmail_User.Text))
                 {
-                    MessageBox.Show("Email ou Nome estão vazios e por isso não será possivel excluir!!!");
+                    MessageBox.Show(this, "Email ou Nome estão vazios e por isso não será possivel excluir!!!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 else
@@ -242,7 +260,7 @@ namespace crud
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu um erro na hora de deletar");
+                MessageBox.Show(this, "Ocorreu um erro na hora de deletar", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             finally
@@ -260,11 +278,11 @@ namespace crud
                 string sql;
                 if (String.IsNullOrEmpty(txtNome_User.Text) || String.IsNullOrEmpty(txtEmail_User.Text))  
                 {
-                    MessageBox.Show("Email ou Nome estão vazios e por isso não será possivel salvar!!!");
+                    MessageBox.Show(this, "Email ou Nome estão vazios e por isso não será possivel salvar!!!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 if (!util.verificaEmail(txtEmail_User.Text)) {
-                    MessageBox.Show("Email Inválido!");
+                    MessageBox.Show("Email Inválido!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 else if (permissao == "Funcionario" || permissao == "Administrador")
@@ -290,7 +308,7 @@ namespace crud
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao salvar");
+                MessageBox.Show("Erro ao salvar", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             finally
             {
@@ -309,7 +327,7 @@ namespace crud
 
         private void btnChamados_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, "Chat inativo no momento");
+            MessageBox.Show(this, "Chat inativo no momento", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
 
@@ -346,7 +364,7 @@ namespace crud
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu um erro no calculo de gastos mensais");
+                MessageBox.Show(this, "Ocorreu um erro no calculo de gastos mensais", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -364,6 +382,44 @@ namespace crud
             {
                 return;
             }
+        }
+
+        private void btnChamados_Click_1(object sender, EventArgs e)
+        {
+            VerificarChamados chamados = new VerificarChamados(emailLogin, permissao);
+            chamados.ShowDialog();
+        }
+
+        private void btnAbrirChamado_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cbFuncionario.SelectedItem == null)
+                {
+                    MessageBox.Show(this, "Funcionario inexistente", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                string funcionario = cbFuncionario.SelectedItem.ToString();
+                int id = Convert.ToInt32(idGastosMensais);
+                System.Console.WriteLine(funcionario);
+                if (funcionario == null)
+                {
+                    MessageBox.Show(this, "Funcionario inexistente", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                if (funcionario == "[, ]")
+                {
+                    MessageBox.Show(this, "Não é possivel abrir um chamado sem informar o nome do funcionario", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                AbrirChamado abrirChamado = new AbrirChamado(txtNome_User.Text, txtEmail_User.Text, id, cbFuncionario.SelectedItem);
+                abrirChamado.ShowDialog();
+            }
+            catch (System.NullReferenceException)
+            {
+                MessageBox.Show(this, "Nomede funcionario não existe", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
         }
     }
 }

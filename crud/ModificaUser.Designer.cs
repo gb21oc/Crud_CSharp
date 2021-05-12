@@ -47,7 +47,7 @@ namespace crud
             this.lblAdm = new System.Windows.Forms.Label();
             this.lblUser = new System.Windows.Forms.Label();
             this.btnCadastroDespesas = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbGastosMensais = new System.Windows.Forms.GroupBox();
             this.lblDtDezembro = new System.Windows.Forms.Label();
             this.lblDtNovembro = new System.Windows.Forms.Label();
             this.lblDtOutubro = new System.Windows.Forms.Label();
@@ -88,12 +88,16 @@ namespace crud
             this.label4 = new System.Windows.Forms.Label();
             this.txtSalarioUpdate = new System.Windows.Forms.TextBox();
             this.lblSalarioUpdate = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
+            this.lblSeuSalario = new System.Windows.Forms.Label();
             this.lblSalario = new System.Windows.Forms.Label();
             this.lblCadastrarDespesas = new System.Windows.Forms.Label();
             this.btnSair = new System.Windows.Forms.Button();
+            this.btnChamados = new System.Windows.Forms.Button();
+            this.lblChamados = new System.Windows.Forms.Label();
+            this.lblQtdChamados = new System.Windows.Forms.Label();
+            this.btnAbrirChamado = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridUser)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.gbGastosMensais.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -192,6 +196,7 @@ namespace crud
             // 
             // cbFuncionario
             // 
+            this.cbFuncionario.Enabled = false;
             this.cbFuncionario.FormattingEnabled = true;
             this.cbFuncionario.Items.AddRange(new object[] {
             "Comum",
@@ -272,52 +277,52 @@ namespace crud
             this.btnCadastroDespesas.UseVisualStyleBackColor = true;
             this.btnCadastroDespesas.Click += new System.EventHandler(this.btnCadastroDespesas_Click);
             // 
-            // groupBox1
+            // gbGastosMensais
             // 
-            this.groupBox1.Controls.Add(this.lblDtDezembro);
-            this.groupBox1.Controls.Add(this.lblDtNovembro);
-            this.groupBox1.Controls.Add(this.lblDtOutubro);
-            this.groupBox1.Controls.Add(this.lblDtSetembro);
-            this.groupBox1.Controls.Add(this.lblDtFev);
-            this.groupBox1.Controls.Add(this.lblDtMarco);
-            this.groupBox1.Controls.Add(this.lblDtAbril);
-            this.groupBox1.Controls.Add(this.lblDtMaio);
-            this.groupBox1.Controls.Add(this.lblDtAgosto);
-            this.groupBox1.Controls.Add(this.lblDtJunho);
-            this.groupBox1.Controls.Add(this.lblDtJulho);
-            this.groupBox1.Controls.Add(this.lblDtJan);
-            this.groupBox1.Controls.Add(this.lblValorDezembro);
-            this.groupBox1.Controls.Add(this.lblValorNovembro);
-            this.groupBox1.Controls.Add(this.lblValorOutubro);
-            this.groupBox1.Controls.Add(this.lblValorSetembro);
-            this.groupBox1.Controls.Add(this.lblValorFev);
-            this.groupBox1.Controls.Add(this.lblValorMarco);
-            this.groupBox1.Controls.Add(this.lblValorAbril);
-            this.groupBox1.Controls.Add(this.lblValorMaio);
-            this.groupBox1.Controls.Add(this.lblValorAgosto);
-            this.groupBox1.Controls.Add(this.lblValorJunho);
-            this.groupBox1.Controls.Add(this.lblValorJulho);
-            this.groupBox1.Controls.Add(this.lblValorJan);
-            this.groupBox1.Controls.Add(this.label20);
-            this.groupBox1.Controls.Add(this.label19);
-            this.groupBox1.Controls.Add(this.label18);
-            this.groupBox1.Controls.Add(this.label17);
-            this.groupBox1.Controls.Add(this.label16);
-            this.groupBox1.Controls.Add(this.label15);
-            this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(12, 129);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(350, 347);
-            this.groupBox1.TabIndex = 29;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Gastos Mensais";
+            this.gbGastosMensais.Controls.Add(this.lblDtDezembro);
+            this.gbGastosMensais.Controls.Add(this.lblDtNovembro);
+            this.gbGastosMensais.Controls.Add(this.lblDtOutubro);
+            this.gbGastosMensais.Controls.Add(this.lblDtSetembro);
+            this.gbGastosMensais.Controls.Add(this.lblDtFev);
+            this.gbGastosMensais.Controls.Add(this.lblDtMarco);
+            this.gbGastosMensais.Controls.Add(this.lblDtAbril);
+            this.gbGastosMensais.Controls.Add(this.lblDtMaio);
+            this.gbGastosMensais.Controls.Add(this.lblDtAgosto);
+            this.gbGastosMensais.Controls.Add(this.lblDtJunho);
+            this.gbGastosMensais.Controls.Add(this.lblDtJulho);
+            this.gbGastosMensais.Controls.Add(this.lblDtJan);
+            this.gbGastosMensais.Controls.Add(this.lblValorDezembro);
+            this.gbGastosMensais.Controls.Add(this.lblValorNovembro);
+            this.gbGastosMensais.Controls.Add(this.lblValorOutubro);
+            this.gbGastosMensais.Controls.Add(this.lblValorSetembro);
+            this.gbGastosMensais.Controls.Add(this.lblValorFev);
+            this.gbGastosMensais.Controls.Add(this.lblValorMarco);
+            this.gbGastosMensais.Controls.Add(this.lblValorAbril);
+            this.gbGastosMensais.Controls.Add(this.lblValorMaio);
+            this.gbGastosMensais.Controls.Add(this.lblValorAgosto);
+            this.gbGastosMensais.Controls.Add(this.lblValorJunho);
+            this.gbGastosMensais.Controls.Add(this.lblValorJulho);
+            this.gbGastosMensais.Controls.Add(this.lblValorJan);
+            this.gbGastosMensais.Controls.Add(this.label20);
+            this.gbGastosMensais.Controls.Add(this.label19);
+            this.gbGastosMensais.Controls.Add(this.label18);
+            this.gbGastosMensais.Controls.Add(this.label17);
+            this.gbGastosMensais.Controls.Add(this.label16);
+            this.gbGastosMensais.Controls.Add(this.label15);
+            this.gbGastosMensais.Controls.Add(this.label14);
+            this.gbGastosMensais.Controls.Add(this.label13);
+            this.gbGastosMensais.Controls.Add(this.label12);
+            this.gbGastosMensais.Controls.Add(this.label11);
+            this.gbGastosMensais.Controls.Add(this.label10);
+            this.gbGastosMensais.Controls.Add(this.label9);
+            this.gbGastosMensais.Controls.Add(this.label5);
+            this.gbGastosMensais.Controls.Add(this.label4);
+            this.gbGastosMensais.Location = new System.Drawing.Point(12, 129);
+            this.gbGastosMensais.Name = "gbGastosMensais";
+            this.gbGastosMensais.Size = new System.Drawing.Size(350, 347);
+            this.gbGastosMensais.TabIndex = 29;
+            this.gbGastosMensais.TabStop = false;
+            this.gbGastosMensais.Text = "Gastos Mensais";
             // 
             // lblDtDezembro
             // 
@@ -691,14 +696,14 @@ namespace crud
             this.lblSalarioUpdate.TabIndex = 30;
             this.lblSalarioUpdate.Text = "Salario:";
             // 
-            // label23
+            // lblSeuSalario
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(12, 104);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(67, 13);
-            this.label23.TabIndex = 33;
-            this.label23.Text = "Seu Salario: ";
+            this.lblSeuSalario.AutoSize = true;
+            this.lblSeuSalario.Location = new System.Drawing.Point(12, 104);
+            this.lblSeuSalario.Name = "lblSeuSalario";
+            this.lblSeuSalario.Size = new System.Drawing.Size(67, 13);
+            this.lblSeuSalario.TabIndex = 33;
+            this.lblSeuSalario.Text = "Seu Salario: ";
             // 
             // lblSalario
             // 
@@ -727,18 +732,60 @@ namespace crud
             this.btnSair.UseVisualStyleBackColor = true;
             this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             // 
+            // btnChamados
+            // 
+            this.btnChamados.Location = new System.Drawing.Point(684, 101);
+            this.btnChamados.Name = "btnChamados";
+            this.btnChamados.Size = new System.Drawing.Size(114, 23);
+            this.btnChamados.TabIndex = 37;
+            this.btnChamados.Text = "Chamados";
+            this.btnChamados.UseVisualStyleBackColor = true;
+            this.btnChamados.Click += new System.EventHandler(this.btnChamados_Click_1);
+            // 
+            // lblChamados
+            // 
+            this.lblChamados.AutoSize = true;
+            this.lblChamados.Location = new System.Drawing.Point(495, 106);
+            this.lblChamados.Name = "lblChamados";
+            this.lblChamados.Size = new System.Drawing.Size(80, 13);
+            this.lblChamados.TabIndex = 38;
+            this.lblChamados.Text = "Qtd Chamados:";
+            // 
+            // lblQtdChamados
+            // 
+            this.lblQtdChamados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQtdChamados.ForeColor = System.Drawing.Color.Lime;
+            this.lblQtdChamados.Location = new System.Drawing.Point(572, 106);
+            this.lblQtdChamados.Name = "lblQtdChamados";
+            this.lblQtdChamados.Size = new System.Drawing.Size(72, 13);
+            this.lblQtdChamados.TabIndex = 39;
+            // 
+            // btnAbrirChamado
+            // 
+            this.btnAbrirChamado.Location = new System.Drawing.Point(453, 191);
+            this.btnAbrirChamado.Name = "btnAbrirChamado";
+            this.btnAbrirChamado.Size = new System.Drawing.Size(114, 23);
+            this.btnAbrirChamado.TabIndex = 40;
+            this.btnAbrirChamado.Text = "Abrir Chamado";
+            this.btnAbrirChamado.UseVisualStyleBackColor = true;
+            this.btnAbrirChamado.Click += new System.EventHandler(this.btnAbrirChamado_Click);
+            // 
             // ModificaUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(878, 493);
+            this.Controls.Add(this.btnAbrirChamado);
+            this.Controls.Add(this.lblQtdChamados);
+            this.Controls.Add(this.lblChamados);
+            this.Controls.Add(this.btnChamados);
             this.Controls.Add(this.btnSair);
             this.Controls.Add(this.lblCadastrarDespesas);
             this.Controls.Add(this.lblSalario);
-            this.Controls.Add(this.label23);
+            this.Controls.Add(this.lblSeuSalario);
             this.Controls.Add(this.txtSalarioUpdate);
             this.Controls.Add(this.lblSalarioUpdate);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbGastosMensais);
             this.Controls.Add(this.btnCadastroDespesas);
             this.Controls.Add(this.lblUser);
             this.Controls.Add(this.cbAdm);
@@ -761,8 +808,8 @@ namespace crud
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModificaUser";
             ((System.ComponentModel.ISupportInitialize)(this.gridUser)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbGastosMensais.ResumeLayout(false);
+            this.gbGastosMensais.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -788,7 +835,7 @@ namespace crud
         private System.Windows.Forms.Label lblAdm;
         private System.Windows.Forms.Label lblUser;
         private System.Windows.Forms.Button btnCadastroDespesas;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbGastosMensais;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
@@ -829,9 +876,13 @@ namespace crud
         private System.Windows.Forms.Label lblValorNovembro;
         private System.Windows.Forms.TextBox txtSalarioUpdate;
         private System.Windows.Forms.Label lblSalarioUpdate;
-        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label lblSeuSalario;
         private System.Windows.Forms.Label lblSalario;
         private System.Windows.Forms.Label lblCadastrarDespesas;
         private System.Windows.Forms.Button btnSair;
+        private System.Windows.Forms.Button btnChamados;
+        private System.Windows.Forms.Label lblChamados;
+        private System.Windows.Forms.Label lblQtdChamados;
+        private System.Windows.Forms.Button btnAbrirChamado;
     }
 }

@@ -109,6 +109,7 @@ namespace crud
                 if (cbDespesasMeses.SelectedItem == null)
                 {
                     MessageBox.Show("Filtro mes não pode ficar vazio");
+                    return;
                 }
                 if (btnRmvIsTrue)
                 {
@@ -128,11 +129,12 @@ namespace crud
                     {
                         if (row.Cells["VALOR"].Value == "0")
                         {
-                            MessageBox.Show("Filtro mes não pode ficar vazio");
+                            MessageBox.Show("Não é possivel salvar a despesa com o valor igual a 0");
                             return;
                         }
                         if (row.Cells["DESCRICAO"].Value != "" || row.Cells["VALOR"].Value != "")
                         {
+                            conexao.ConexaoDbOpen();
                             sql = "INSERT INTO GASTOS(ID_USER, MES, DESCRICAO, VALOR) VALUES(" +
                                 "'" + idUser                       +"', "+
                                 "'" + cbDespesasMeses.SelectedItem + "', " +
@@ -154,7 +156,9 @@ namespace crud
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu um erro na hora de salvar");
+                MessageBox.Show(ex.ToString());
+                //MessageBox.Show("Ocorreu um erro na hora de salvar");
+                return;
             }
         }
 
@@ -286,6 +290,7 @@ namespace crud
             catch (Exception ex)
             {
                 MessageBox.Show("Ocorreu um erro na hora de apagar");
+                return;
             }
         }
 
