@@ -15,12 +15,12 @@ namespace crud
     {
         bool verificaDoubleClick = false;
         int idAtual;
+        public string idGastosMensais;
         string permissao;
         string emailLogin;
         public ModificaUser()
         {
             InitializeComponent();
-            GastosMensais();
             btnSalvar.Enabled = false;
             lblSalarioUpdate.Visible = false;
             txtSalarioUpdate.Visible = false;
@@ -34,12 +34,11 @@ namespace crud
             {
                 sql = "SELECT SALARIO FROM Crud_User where email = " + "'"+ emailLogin  + "'";
                 string result = conexao.resultLabel(sql);
-                System.Console.WriteLine(result);
                 lblSalario.Text = result;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Ocorreu um erro quando foi preencher o salario");
             }
         }
 
@@ -52,13 +51,14 @@ namespace crud
             btnSalvar.Enabled           = false;
             lblSalarioUpdate.Visible          = false;
             txtSalarioUpdate.Visible    = false;
+            btnCadastroDespesas.Enabled = false;
         }
 
         public void sqlPreencheDataGrid(string sql)
         {
             if (permissao == "Comum")
             {
-                lblUser.Text = "Suas informações(de dois cliques para editar)";
+                lblUser.Text = "Suas informações(de dois cliques para editar ou para cadastrar as despesas!)";
             }
             ConexaoDb conexao = new ConexaoDb();
             DataTable tb = conexao.DataTable_ConsultarDados(sql);
@@ -78,7 +78,7 @@ namespace crud
             gridUser.DataSource = null;
             string sql;
             ModificaUser modificaUser = new ModificaUser();
-            
+
             gridUser.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             if (permissao == "Comum")
             {
@@ -136,9 +136,11 @@ namespace crud
             this.Cursor = Cursors.Default;
         }
 
-        public void verificaPermissaoUser(string email, string senha)
+        public void verificaPermissaoUser(string email, string senha, string id)
         {
+            idGastosMensais = id;
             ConexaoDb conexao = new ConexaoDb();
+            GastosMensais(id);
             emailLogin = email;
             try
             {
@@ -157,7 +159,7 @@ namespace crud
                         cbAdm.Enabled               = false;
                         cbFuncionario.Enabled       = false;
                         cbCliente.Enabled           = false;
-                        btnCadastroDespesas.Enabled = true;
+                        btnCadastroDespesas.Enabled = false;
                         permissao = "Comum";
                         preencheDataGrid("Comum");
                         break;
@@ -167,9 +169,11 @@ namespace crud
                         btnDeletar.Enabled = false;
                         btnCadastroDespesas.Visible = false;
                         btnCadastroDespesas.Enabled = false;
+                        lblCadastrarDespesas.Visible = false;
                         preencheDataGrid("Funcionario");
                         break;
                     case "Administrador":
+                        lblCadastrarDespesas.Visible = false;
                         btnDeletar.Enabled = false;
                         btnCadastroDespesas.Visible = false;
                         btnCadastroDespesas.Enabled = false;
@@ -179,7 +183,7 @@ namespace crud
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Ocorreu um erro na validação");
                 return;
             }
             finally
@@ -202,6 +206,7 @@ namespace crud
             }
             else
             {
+                btnCadastroDespesas.Enabled = true;
                 txtSalarioUpdate.Text = gridUser.Rows[e.RowIndex].Cells["SALARIO"].Value.ToString();
                 txtSalarioUpdate.Visible = true;
                 lblSalarioUpdate.Visible = true;
@@ -237,7 +242,7 @@ namespace crud
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Ocorreu um erro na hora de deletar");
                 return;
             }
             finally
@@ -267,6 +272,7 @@ namespace crud
                     sql = "UPDATE Crud_User SET NOME = " + "'" + txtNome_User.Text + "'"
                     + ", EMAIL = " + "'" + txtEmail_User.Text + "'"
                     + ", PERMISSAO = " + "'" + cbPermissao.SelectedItem + "'"
+                    + ", SALARIO = " + "'" + txtSalarioUpdate.Text + "'"
                     + " WHERE ID = " + "'" + idAtual + "'";
                     conexao.ExecutaQuery(sql);
                     preencheDataGrid(permissao);
@@ -274,6 +280,7 @@ namespace crud
                 else
                 {
                     sql = "UPDATE Crud_User SET NOME = " + "'" + txtNome_User.Text + "'"
+                           + ", SALARIO = " + "'" + txtSalarioUpdate.Text + "'"
                            + ", EMAIL = " + "'" + txtEmail_User.Text + "'"
                            + " WHERE ID = " + "'" + idAtual + "'";
                     conexao.ExecutaQuery(sql);
@@ -293,8 +300,11 @@ namespace crud
 
         private void btnCadastroDespesas_Click(object sender, EventArgs e)
         {
+            //idUser = 
             Despesas despesas = new Despesas();
+            despesas.idUser = idAtual;
             despesas.ShowDialog();
+            GastosMensais(idGastosMensais);
         }
 
         private void btnChamados_Click(object sender, EventArgs e)
@@ -303,40 +313,56 @@ namespace crud
             return;
         }
 
-        public void GastosMensais()
+        public void GastosMensais(string id)
         {
             try
             {
                 ConexaoDb conexao = new ConexaoDb();
                 string sql;
-                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Janeiro'";
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Janeiro' AND ID_USER = " + "'" + id + "'";
                 lblValorJan.Text =  conexao.resultLabel(sql);
-                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Fevereiro'";
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Fevereiro' AND ID_USER = " + "'" + id + "'";
                 lblValorFev.Text = conexao.resultLabel(sql);
-                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Março'";
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Março' AND ID_USER = " + "'" + id + "'";
                 lblValorMarco.Text = conexao.resultLabel(sql);
-                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Abril'";
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Abril' AND ID_USER = " + "'" + id + "'";
                 lblValorAbril.Text = conexao.resultLabel(sql);
-                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Maio'";
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Maio' AND ID_USER = " + "'" + id + "'";
                 lblValorMaio.Text = conexao.resultLabel(sql);
-                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Junho'";
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Junho' AND ID_USER = " + "'" + id + "'";
                 lblValorJunho.Text = conexao.resultLabel(sql);
-                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Julho'";
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Julho' AND ID_USER = " + "'" + id + "'";
                 lblValorJulho.Text = conexao.resultLabel(sql);
-                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Agosto'";
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Agosto' AND ID_USER = " + "'" + id + "'";
                 lblValorAgosto.Text = conexao.resultLabel(sql);
-                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Setembro'";
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Setembro' AND ID_USER = " + "'" + id + "'";
                 lblValorSetembro.Text = conexao.resultLabel(sql);
-                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Outubro'";
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Outubro' AND ID_USER = " + "'" + id + "'";
                 lblValorOutubro.Text = conexao.resultLabel(sql);
-                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Novembro'";
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Novembro' AND ID_USER = " + "'" + id + "'";
                 lblValorNovembro.Text = conexao.resultLabel(sql);
-                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Dezembro'";
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Dezembro' AND ID_USER = " + "'" + id + "'";
                 lblValorDezembro.Text = conexao.resultLabel(sql);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Ocorreu um erro no calculo de gastos mensais");
+            }
+        }
+
+        private void btnSair_Click(object sender, EventArgs e)
+        {
+            DialogResult dialog = MessageBox.Show($"Deseja realmente sair?", "sair", MessageBoxButtons.YesNo);
+            if (dialog == DialogResult.Yes)
+            {
+                Form1 form1 = new Form1();
+                form1.Closed += (s, args) => this.Close();
+                form1.Show();
+                Hide();
+            }
+            else
+            {
+                return;
             }
         }
     }

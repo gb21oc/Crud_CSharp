@@ -90,6 +90,8 @@ namespace crud
             this.lblSalarioUpdate = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.lblSalario = new System.Windows.Forms.Label();
+            this.lblCadastrarDespesas = new System.Windows.Forms.Label();
+            this.btnSair = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridUser)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -707,11 +709,31 @@ namespace crud
             this.lblSalario.Size = new System.Drawing.Size(72, 13);
             this.lblSalario.TabIndex = 34;
             // 
+            // lblCadastrarDespesas
+            // 
+            this.lblCadastrarDespesas.AutoSize = true;
+            this.lblCadastrarDespesas.Location = new System.Drawing.Point(571, 217);
+            this.lblCadastrarDespesas.Name = "lblCadastrarDespesas";
+            this.lblCadastrarDespesas.Size = new System.Drawing.Size(0, 13);
+            this.lblCadastrarDespesas.TabIndex = 35;
+            // 
+            // btnSair
+            // 
+            this.btnSair.Location = new System.Drawing.Point(791, 37);
+            this.btnSair.Name = "btnSair";
+            this.btnSair.Size = new System.Drawing.Size(75, 23);
+            this.btnSair.TabIndex = 36;
+            this.btnSair.Text = "Sair";
+            this.btnSair.UseVisualStyleBackColor = true;
+            this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
+            // 
             // ModificaUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(878, 493);
+            this.Controls.Add(this.btnSair);
+            this.Controls.Add(this.lblCadastrarDespesas);
             this.Controls.Add(this.lblSalario);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.txtSalarioUpdate);
@@ -809,5 +831,7 @@ namespace crud
         private System.Windows.Forms.Label lblSalarioUpdate;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label lblSalario;
+        private System.Windows.Forms.Label lblCadastrarDespesas;
+        private System.Windows.Forms.Button btnSair;
     }
 }

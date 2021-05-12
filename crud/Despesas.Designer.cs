@@ -40,18 +40,20 @@ namespace crud
             this.btnRmvLinha = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.lblTotalMes = new System.Windows.Forms.Label();
+            this.btnApagarDespesas = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridDespesas)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnApagarDespesas);
             this.groupBox1.Controls.Add(this.btnLimpar);
             this.groupBox1.Controls.Add(this.btnPesquisar);
             this.groupBox1.Controls.Add(this.btnEnviar);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(450, 64);
+            this.groupBox1.Size = new System.Drawing.Size(375, 85);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
@@ -68,7 +70,7 @@ namespace crud
             // 
             // btnPesquisar
             // 
-            this.btnPesquisar.Location = new System.Drawing.Point(280, 13);
+            this.btnPesquisar.Location = new System.Drawing.Point(196, 48);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(76, 29);
             this.btnPesquisar.TabIndex = 3;
@@ -78,11 +80,11 @@ namespace crud
             // 
             // btnEnviar
             // 
-            this.btnEnviar.Location = new System.Drawing.Point(365, 13);
+            this.btnEnviar.Location = new System.Drawing.Point(278, 13);
             this.btnEnviar.Name = "btnEnviar";
             this.btnEnviar.Size = new System.Drawing.Size(76, 29);
             this.btnEnviar.TabIndex = 2;
-            this.btnEnviar.Text = "Enviar";
+            this.btnEnviar.Text = "Salvar";
             this.btnEnviar.UseVisualStyleBackColor = true;
             this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
             // 
@@ -122,15 +124,16 @@ namespace crud
             // 
             this.gridDespesas.AllowUserToAddRows = false;
             this.gridDespesas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridDespesas.Location = new System.Drawing.Point(12, 124);
+            this.gridDespesas.Location = new System.Drawing.Point(12, 137);
             this.gridDespesas.Name = "gridDespesas";
-            this.gridDespesas.Size = new System.Drawing.Size(333, 318);
+            this.gridDespesas.Size = new System.Drawing.Size(333, 397);
             this.gridDespesas.TabIndex = 1;
+            this.gridDespesas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridDespesas_CellClick);
             // 
             // btnAdcLinha
             // 
             this.btnAdcLinha.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdcLinha.Location = new System.Drawing.Point(289, 95);
+            this.btnAdcLinha.Location = new System.Drawing.Point(289, 106);
             this.btnAdcLinha.Name = "btnAdcLinha";
             this.btnAdcLinha.Size = new System.Drawing.Size(25, 27);
             this.btnAdcLinha.TabIndex = 2;
@@ -141,7 +144,7 @@ namespace crud
             // btnRmvLinha
             // 
             this.btnRmvLinha.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRmvLinha.Location = new System.Drawing.Point(320, 95);
+            this.btnRmvLinha.Location = new System.Drawing.Point(320, 106);
             this.btnRmvLinha.Name = "btnRmvLinha";
             this.btnRmvLinha.Size = new System.Drawing.Size(25, 27);
             this.btnRmvLinha.TabIndex = 3;
@@ -152,7 +155,7 @@ namespace crud
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 108);
+            this.label2.Location = new System.Drawing.Point(7, 113);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 13);
             this.label2.TabIndex = 4;
@@ -161,16 +164,26 @@ namespace crud
             // lblTotalMes
             // 
             this.lblTotalMes.ForeColor = System.Drawing.Color.Lime;
-            this.lblTotalMes.Location = new System.Drawing.Point(84, 108);
+            this.lblTotalMes.Location = new System.Drawing.Point(84, 113);
             this.lblTotalMes.Name = "lblTotalMes";
             this.lblTotalMes.Size = new System.Drawing.Size(100, 13);
             this.lblTotalMes.TabIndex = 5;
+            // 
+            // btnApagarDespesas
+            // 
+            this.btnApagarDespesas.Location = new System.Drawing.Point(278, 48);
+            this.btnApagarDespesas.Name = "btnApagarDespesas";
+            this.btnApagarDespesas.Size = new System.Drawing.Size(76, 29);
+            this.btnApagarDespesas.TabIndex = 5;
+            this.btnApagarDespesas.Text = "Apagar";
+            this.btnApagarDespesas.UseVisualStyleBackColor = true;
+            this.btnApagarDespesas.Click += new System.EventHandler(this.btnApagarDespesas_Click);
             // 
             // Despesas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 454);
+            this.ClientSize = new System.Drawing.Size(422, 546);
             this.Controls.Add(this.lblTotalMes);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnRmvLinha);
@@ -201,5 +214,6 @@ namespace crud
         private System.Windows.Forms.Button btnLimpar;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTotalMes;
+        private System.Windows.Forms.Button btnApagarDespesas;
     }
 }

@@ -12,9 +12,16 @@ namespace crud.Properties
 {
     public class ConexaoDb
     {
-        public SqlConnection cn { get; set; }
+        public SqlConnection cn { get; set; } 
 
-        public ConexaoDb() //Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=CrudCsharp;Data Source=*\\*
+
+        public ConexaoDb() //Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=CrudCsharp;Data Source=LAPTOP-BQIMSF2O\\SQLEXPRESS
+        {
+            cn = new SqlConnection("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=CrudCsharp;Data Source=LAPTOP-BQIMSF2O\\SQLEXPRESS");
+            cn.Open();
+        }
+
+        public void ConexaoDbOpen()
         {
             cn = new SqlConnection("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=CrudCsharp;Data Source=LAPTOP-BQIMSF2O\\SQLEXPRESS");
             cn.Open();
@@ -44,8 +51,8 @@ namespace crud.Properties
             }
             catch (SqlException ex)
             {
-                //MessageBox.Show("Ocorreu um erro");
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Ocorreu um erro");
+                //MessageBox.Show(ex.ToString());
             }
             finally
             {
@@ -77,8 +84,8 @@ namespace crud.Properties
             }
             catch (SqlException ex)
             {
-                MessageBox.Show(ex.ToString());
-                //MessageBox.Show("Ocorre um erro");
+                //MessageBox.Show(ex.ToString());
+                MessageBox.Show("Ocorreu um erro");
                 return;
             }
             finally

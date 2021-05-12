@@ -1,5 +1,6 @@
 ﻿using crud.Properties;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,10 @@ namespace crud
 {
     public partial class Despesas : Form
     {
+        public int idUser;
+        ArrayList idGrid = new ArrayList();
+        bool btnRmvIsTrue = false;
+        bool btnRmvIsTrueInto = false;
         public Despesas()
         {
             InitializeComponent();
@@ -61,6 +66,7 @@ namespace crud
             }
 
             this.gridDespesas.Columns["ID"].Visible = false;
+            this.gridDespesas.Columns["ID_USER"].Visible = false;
             this.gridDespesas.Columns["MES"].Visible = false;
             this.gridDespesas.Columns["DESCRICAO"].Width = 130;
             this.gridDespesas.Columns["VALOR"].Width = 130;
@@ -72,6 +78,7 @@ namespace crud
         {
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("ID", typeof(int)));
+            dt.Columns.Add(new DataColumn("ID_USER", typeof(int)));
             dt.Columns.Add(new DataColumn("MES", typeof(string)));
             dt.Columns.Add(new DataColumn("DESCRICAO", typeof(string)));
             dt.Columns.Add(new DataColumn("VALOR", typeof(float)));
@@ -103,6 +110,17 @@ namespace crud
                 {
                     MessageBox.Show("Filtro mes não pode ficar vazio");
                 }
+                if (btnRmvIsTrue)
+                {
+                    ConexaoDb conexao = new ConexaoDb();
+                    foreach (var id in idGrid)
+                    {
+                        conexao.ConexaoDbOpen();
+                        sql = "DELETE FROM GASTOS WHERE ID = " + "'" + id + "'";
+                        conexao.ExecutaQuery(sql);
+                    }
+                    btnRmvIsTrue = false;
+                }
                 else
                 {
                     ConexaoDb conexao = new ConexaoDb();
@@ -115,31 +133,28 @@ namespace crud
                         }
                         if (row.Cells["DESCRICAO"].Value != "" || row.Cells["VALOR"].Value != "")
                         {
-                            sql = "INSERT INTO GASTOS(MES, DESCRICAO, VALOR) VALUES(" +
+                            sql = "INSERT INTO GASTOS(ID_USER, MES, DESCRICAO, VALOR) VALUES(" +
+                                "'" + idUser                       +"', "+
                                 "'" + cbDespesasMeses.SelectedItem + "', " +
                                 "'" + row.Cells["DESCRICAO"].Value + "', " +
-                                "'" + row.Cells["VALOR"].Value + "'" +
+                                "'" + row.Cells["VALOR"].Value     + "'" +
                                 ")";
                             conexao.ExecutaQuery(sql);
-
                         }
                         else {
                             MessageBox.Show("A campos vazio e por isso não sera possivel cadastrar");
                         }
                     }
+                    InitializeGridDespesas();
+                    cbDespesasMeses.SelectedItem = null;
+                    btnAdcLinha.Enabled = false;
+                    btnRmvLinha.Enabled = false;
+                    btnEnviar.Enabled = false;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
-                InitializeGridDespesas();
-                cbDespesasMeses.SelectedItem = null;
-                btnAdcLinha.Enabled = false;
-                btnRmvLinha.Enabled = false;
-                btnEnviar.Enabled = false;
+                MessageBox.Show("Ocorreu um erro na hora de salvar");
             }
         }
 
@@ -155,58 +170,58 @@ namespace crud
                 btnEnviar.Enabled = false;
                 return;
             }
-            btnEnviar.Enabled = false;
+            btnEnviar.Enabled = true;
             btnAdcLinha.Enabled = false;
-            btnRmvLinha.Enabled = false;
+            btnRmvLinha.Enabled = true;
             string sql;
             switch (cbDespesasMeses.SelectedItem)
             {
                 case "Janeiro":
-                    sql = "SELECT * FROM GASTOS WHERE MES = 'Janeiro'";
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Janeiro' AND ID_USER = "+ "'"+ idUser + "'";
                     sqlPreencheDataGrid(sql);
                     break;
                 case "Fevereiro":
-                    sql = "SELECT * FROM GASTOS WHERE MES = 'Fevereiro'";
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Fevereiro' AND ID_USER = " + "'" + idUser + "'";
                     sqlPreencheDataGrid(sql);
                     break;
                 case "Março":
-                    sql = "SELECT * FROM GASTOS WHERE MES = 'Março'";
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Março' AND ID_USER = " + "'" + idUser + "'";
                     sqlPreencheDataGrid(sql);
                     break;
                 case "Abril":
-                    sql = "SELECT * FROM GASTOS WHERE MES = 'Abril'";
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Abril' AND ID_USER = " + "'" + idUser + "'";
                     sqlPreencheDataGrid(sql);
                     break;
                 case "Maio":
-                    sql = "SELECT * FROM GASTOS WHERE MES = 'Maio'";
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Maio' AND ID_USER = " + "'" + idUser + "'";
                     sqlPreencheDataGrid(sql);
                     break;
                 case "Junho":
-                    sql = "SELECT * FROM GASTOS WHERE MES = 'Junho'";
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Junho' AND ID_USER = " + "'" + idUser + "'";
                     sqlPreencheDataGrid(sql);
                     break;
                 case "Julho":
-                    sql = "SELECT * FROM GASTOS WHERE MES = 'Julho'";
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Julho' AND ID_USER = " + "'" + idUser + "'";
                     sqlPreencheDataGrid(sql);
                     break;
                 case "Agosto":
-                    sql = "SELECT * FROM GASTOS WHERE MES = 'Agosto'";
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Agosto' AND ID_USER = " + "'" + idUser + "'";
                     sqlPreencheDataGrid(sql);
                     break;
                 case "Setembro":
-                    sql = "SELECT * FROM GASTOS WHERE MES = 'Setembro'";
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Setembro' AND ID_USER = " + "'" + idUser + "'";
                     sqlPreencheDataGrid(sql);
                     break;
                 case "Outubro":
-                    sql = "SELECT * FROM GASTOS WHERE MES = 'Outubro'";
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Outubro' AND ID_USER = " + "'" + idUser + "'";
                     sqlPreencheDataGrid(sql);
                     break;
                 case "Novembro":
-                    sql = "SELECT * FROM GASTOS WHERE MES = 'Novembro'";
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Novembro' AND ID_USER = " + "'" + idUser + "'";
                     sqlPreencheDataGrid(sql);
                     break;
                 case "Dezembro":
-                    sql = "SELECT * FROM GASTOS WHERE MES = 'Dezembro'";
+                    sql = "SELECT * FROM GASTOS WHERE MES = 'Dezembro' AND ID_USER = " + "'" + idUser + "'";
                     sqlPreencheDataGrid(sql);
                     break;
             }
@@ -240,6 +255,44 @@ namespace crud
             {
                 btnRmvLinha.Enabled = false;
             }
+            btnRmvIsTrue = true;
+        }
+
+        private void btnApagarDespesas_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cbDespesasMeses.SelectedItem == null)
+                {
+                    MessageBox.Show("Não é possivel apagar os gastos do mes, sem informar o mês escolhido!");
+                    return;
+                }
+                DialogResult dialog = MessageBox.Show($"Tem certeza que deseja excluir as despesas do mes: {cbDespesasMeses.SelectedItem}?", "Apagar Despesas", MessageBoxButtons.YesNo);
+                ConexaoDb conexao = new ConexaoDb();
+                string sql;
+                if (dialog == DialogResult.Yes) 
+                {
+                    sql = "DELETE FROM GASTOS WHERE MES = " + "'" + cbDespesasMeses.SelectedItem + "'"+ "AND ID_USER = "+ "'"+ idUser+ "'";
+                    conexao.ExecutaQuery(sql);
+                    ModificaUser modificaUser = new ModificaUser();
+                    modificaUser.GastosMensais(modificaUser.idGastosMensais);
+                }
+                else if(dialog == DialogResult.No)
+                {
+                    return;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro na hora de apagar");
+            }
+        }
+
+        private void gridDespesas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string id = gridDespesas.Rows[e.RowIndex].Cells["ID"].Value.ToString();
+            idGrid.Add(id);
         }
     }
 }

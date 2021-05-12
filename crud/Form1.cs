@@ -57,6 +57,7 @@ namespace crud
             HashPwd hashPwd = new HashPwd();
             ModificaUser mdUser = new ModificaUser();
             Util util = new Util();
+            string id;
             try
             {
                 string sql = "";
@@ -78,12 +79,16 @@ namespace crud
                         "senha = '" + hashSenha + "'";
                     if (conexaoDb.verificaUsuario(sql))
                     {
+                        conexaoDb.ConexaoDbOpen();
+                        sql = "SELECT ID FROM Crud_User WHERE " +
+                        "email = '" + txtLogin.Text + "' and " +
+                        "senha = '" + hashSenha + "'";
+                        id = conexaoDb.resultLabel(sql);
                         MessageBox.Show("Login bem sucedido");
-                        mdUser.verificaPermissaoUser(txtLogin.Text, hashSenha);
+                        mdUser.verificaPermissaoUser(txtLogin.Text, hashSenha, id);
                         mdUser.Closed += (s, args) => this.Close();
                         mdUser.Show();
                         Hide();
-                        
                     }
                     else
                     {
@@ -94,7 +99,7 @@ namespace crud
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Ocorreu uma falha ao logar");
             }
             finally
             {
