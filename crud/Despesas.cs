@@ -229,5 +229,17 @@ namespace crud
             btnRmvLinha.Enabled = true;
             btnEnviar.Enabled = true;
         }
+
+        private void btnRmvLinha_Click(object sender, EventArgs e)
+        {
+            if (gridDespesas.Rows.Count > 0)
+            {
+                gridDespesas.Rows.RemoveAt(gridDespesas.CurrentRow.Index);
+            }
+            if (gridDespesas.Rows.Count < 1)
+            {
+                btnRmvLinha.Enabled = false;
+            }
+        }
     }
 }

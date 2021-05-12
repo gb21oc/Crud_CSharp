@@ -147,6 +147,7 @@ namespace crud
             this.btnRmvLinha.TabIndex = 3;
             this.btnRmvLinha.Text = "-";
             this.btnRmvLinha.UseVisualStyleBackColor = true;
+            this.btnRmvLinha.Click += new System.EventHandler(this.btnRmvLinha_Click);
             // 
             // label2
             // 
