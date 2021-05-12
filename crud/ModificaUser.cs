@@ -20,6 +20,7 @@ namespace crud
         public ModificaUser()
         {
             InitializeComponent();
+            GastosMensais();
             btnSalvar.Enabled = false;
             lblSalarioUpdate.Visible = false;
             txtSalarioUpdate.Visible = false;
@@ -145,11 +146,17 @@ namespace crud
                 switch (conexao.verificaPermissao(sql))
                 {
                     case "Comum":
-                        btnDeletar.Enabled = false;
-                        cbPermissao.Enabled = false;
-                        cbAdm.Enabled = false;
-                        cbFuncionario.Enabled = false;
-                        cbCliente.Enabled = false;
+                        lblCliente.Visible          = false;
+                        lblAdm.Visible              = false;
+                        cbPermissao.Visible         = false;
+                        lblPermissao.Visible        = false;
+                        cbAdm.Visible               = false;
+                        cbCliente.Visible           = false;
+                        btnDeletar.Enabled          = false;
+                        cbPermissao.Enabled         = false;
+                        cbAdm.Enabled               = false;
+                        cbFuncionario.Enabled       = false;
+                        cbCliente.Enabled           = false;
                         btnCadastroDespesas.Enabled = true;
                         permissao = "Comum";
                         preencheDataGrid("Comum");
@@ -187,7 +194,6 @@ namespace crud
             txtNome_User.Text = gridUser.Rows[e.RowIndex].Cells["NOME"].Value.ToString();
             txtEmail_User.Text = gridUser.Rows[e.RowIndex].Cells["E-MAIL"].Value.ToString();
             cbPermissao.SelectedItem = gridUser.Rows[e.RowIndex].Cells["PERMISSAO"].Value.ToString();
-            txtSalarioUpdate.Text = gridUser.Rows[e.RowIndex].Cells["SALARIO"].Value.ToString();
             verificaDoubleClick = true;
             if (permissao == "Funcionario" || permissao == "Administrador" && verificaDoubleClick)
             {
@@ -196,6 +202,7 @@ namespace crud
             }
             else
             {
+                txtSalarioUpdate.Text = gridUser.Rows[e.RowIndex].Cells["SALARIO"].Value.ToString();
                 txtSalarioUpdate.Visible = true;
                 lblSalarioUpdate.Visible = true;
                 btnDeletar.Enabled = false;
@@ -294,6 +301,43 @@ namespace crud
         {
             MessageBox.Show(this, "Chat inativo no momento");
             return;
+        }
+
+        public void GastosMensais()
+        {
+            try
+            {
+                ConexaoDb conexao = new ConexaoDb();
+                string sql;
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Janeiro'";
+                lblValorJan.Text =  conexao.resultLabel(sql);
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Fevereiro'";
+                lblValorFev.Text = conexao.resultLabel(sql);
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Março'";
+                lblValorMarco.Text = conexao.resultLabel(sql);
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Abril'";
+                lblValorAbril.Text = conexao.resultLabel(sql);
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Maio'";
+                lblValorMaio.Text = conexao.resultLabel(sql);
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Junho'";
+                lblValorJunho.Text = conexao.resultLabel(sql);
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Julho'";
+                lblValorJulho.Text = conexao.resultLabel(sql);
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Agosto'";
+                lblValorAgosto.Text = conexao.resultLabel(sql);
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Setembro'";
+                lblValorSetembro.Text = conexao.resultLabel(sql);
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Outubro'";
+                lblValorOutubro.Text = conexao.resultLabel(sql);
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Novembro'";
+                lblValorNovembro.Text = conexao.resultLabel(sql);
+                sql = "SELECT SUM(VALOR) FROM GASTOS WHERE MES = 'Dezembro'";
+                lblValorDezembro.Text = conexao.resultLabel(sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

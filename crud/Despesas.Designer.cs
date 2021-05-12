@@ -107,6 +107,7 @@ namespace crud
             this.cbDespesasMeses.Name = "cbDespesasMeses";
             this.cbDespesasMeses.Size = new System.Drawing.Size(136, 21);
             this.cbDespesasMeses.TabIndex = 1;
+            this.cbDespesasMeses.SelectedIndexChanged += new System.EventHandler(this.cbDespesasMeses_SelectedIndexChanged);
             // 
             // label1
             // 

@@ -33,7 +33,7 @@ namespace crud
             this.txtNome_User = new System.Windows.Forms.TextBox();
             this.txtEmail_User = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblPermissao = new System.Windows.Forms.Label();
             this.cbPermissao = new System.Windows.Forms.ComboBox();
             this.btnDeletar = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
@@ -42,12 +42,11 @@ namespace crud
             this.cbFuncionario = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.cbCliente = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblCliente = new System.Windows.Forms.Label();
             this.cbAdm = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblAdm = new System.Windows.Forms.Label();
             this.lblUser = new System.Windows.Forms.Label();
             this.btnCadastroDespesas = new System.Windows.Forms.Button();
-            this.btnChamados = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblDtDezembro = new System.Windows.Forms.Label();
             this.lblDtNovembro = new System.Windows.Forms.Label();
@@ -127,14 +126,14 @@ namespace crud
             this.label2.TabIndex = 2;
             this.label2.Text = "Email:";
             // 
-            // label3
+            // lblPermissao
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(509, 13);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Permissão:";
+            this.lblPermissao.AutoSize = true;
+            this.lblPermissao.Location = new System.Drawing.Point(509, 13);
+            this.lblPermissao.Name = "lblPermissao";
+            this.lblPermissao.Size = new System.Drawing.Size(58, 13);
+            this.lblPermissao.TabIndex = 4;
+            this.lblPermissao.Text = "Permissão:";
             // 
             // cbPermissao
             // 
@@ -222,14 +221,14 @@ namespace crud
             this.cbCliente.Size = new System.Drawing.Size(175, 21);
             this.cbCliente.TabIndex = 17;
             // 
-            // label7
+            // lblCliente
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(31, 39);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 13);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "Cliente:";
+            this.lblCliente.AutoSize = true;
+            this.lblCliente.Location = new System.Drawing.Point(31, 39);
+            this.lblCliente.Name = "lblCliente";
+            this.lblCliente.Size = new System.Drawing.Size(42, 13);
+            this.lblCliente.TabIndex = 16;
+            this.lblCliente.Text = "Cliente:";
             // 
             // cbAdm
             // 
@@ -243,14 +242,14 @@ namespace crud
             this.cbAdm.Size = new System.Drawing.Size(121, 21);
             this.cbAdm.TabIndex = 19;
             // 
-            // label8
+            // lblAdm
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(509, 39);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(73, 13);
-            this.label8.TabIndex = 18;
-            this.label8.Text = "Administrador:";
+            this.lblAdm.AutoSize = true;
+            this.lblAdm.Location = new System.Drawing.Point(509, 39);
+            this.lblAdm.Name = "lblAdm";
+            this.lblAdm.Size = new System.Drawing.Size(73, 13);
+            this.lblAdm.TabIndex = 18;
+            this.lblAdm.Text = "Administrador:";
             // 
             // lblUser
             // 
@@ -270,16 +269,6 @@ namespace crud
             this.btnCadastroDespesas.Text = "Cadastrar Despesas";
             this.btnCadastroDespesas.UseVisualStyleBackColor = true;
             this.btnCadastroDespesas.Click += new System.EventHandler(this.btnCadastroDespesas_Click);
-            // 
-            // btnChamados
-            // 
-            this.btnChamados.Location = new System.Drawing.Point(791, 39);
-            this.btnChamados.Name = "btnChamados";
-            this.btnChamados.Size = new System.Drawing.Size(75, 23);
-            this.btnChamados.TabIndex = 23;
-            this.btnChamados.Text = "Chat";
-            this.btnChamados.UseVisualStyleBackColor = true;
-            this.btnChamados.Click += new System.EventHandler(this.btnChamados_Click);
             // 
             // groupBox1
             // 
@@ -439,7 +428,7 @@ namespace crud
             // lblValorDezembro
             // 
             this.lblValorDezembro.AutoSize = true;
-            this.lblValorDezembro.Location = new System.Drawing.Point(150, 317);
+            this.lblValorDezembro.Location = new System.Drawing.Point(136, 317);
             this.lblValorDezembro.Name = "lblValorDezembro";
             this.lblValorDezembro.Size = new System.Drawing.Size(13, 13);
             this.lblValorDezembro.TabIndex = 54;
@@ -448,7 +437,7 @@ namespace crud
             // lblValorNovembro
             // 
             this.lblValorNovembro.AutoSize = true;
-            this.lblValorNovembro.Location = new System.Drawing.Point(150, 290);
+            this.lblValorNovembro.Location = new System.Drawing.Point(136, 290);
             this.lblValorNovembro.Name = "lblValorNovembro";
             this.lblValorNovembro.Size = new System.Drawing.Size(13, 13);
             this.lblValorNovembro.TabIndex = 53;
@@ -457,7 +446,7 @@ namespace crud
             // lblValorOutubro
             // 
             this.lblValorOutubro.AutoSize = true;
-            this.lblValorOutubro.Location = new System.Drawing.Point(150, 261);
+            this.lblValorOutubro.Location = new System.Drawing.Point(136, 261);
             this.lblValorOutubro.Name = "lblValorOutubro";
             this.lblValorOutubro.Size = new System.Drawing.Size(13, 13);
             this.lblValorOutubro.TabIndex = 52;
@@ -466,7 +455,7 @@ namespace crud
             // lblValorSetembro
             // 
             this.lblValorSetembro.AutoSize = true;
-            this.lblValorSetembro.Location = new System.Drawing.Point(150, 234);
+            this.lblValorSetembro.Location = new System.Drawing.Point(136, 234);
             this.lblValorSetembro.Name = "lblValorSetembro";
             this.lblValorSetembro.Size = new System.Drawing.Size(13, 13);
             this.lblValorSetembro.TabIndex = 51;
@@ -475,7 +464,7 @@ namespace crud
             // lblValorFev
             // 
             this.lblValorFev.AutoSize = true;
-            this.lblValorFev.Location = new System.Drawing.Point(150, 49);
+            this.lblValorFev.Location = new System.Drawing.Point(136, 49);
             this.lblValorFev.Name = "lblValorFev";
             this.lblValorFev.Size = new System.Drawing.Size(13, 13);
             this.lblValorFev.TabIndex = 50;
@@ -484,7 +473,7 @@ namespace crud
             // lblValorMarco
             // 
             this.lblValorMarco.AutoSize = true;
-            this.lblValorMarco.Location = new System.Drawing.Point(150, 74);
+            this.lblValorMarco.Location = new System.Drawing.Point(136, 74);
             this.lblValorMarco.Name = "lblValorMarco";
             this.lblValorMarco.Size = new System.Drawing.Size(13, 13);
             this.lblValorMarco.TabIndex = 49;
@@ -493,7 +482,7 @@ namespace crud
             // lblValorAbril
             // 
             this.lblValorAbril.AutoSize = true;
-            this.lblValorAbril.Location = new System.Drawing.Point(150, 101);
+            this.lblValorAbril.Location = new System.Drawing.Point(136, 101);
             this.lblValorAbril.Name = "lblValorAbril";
             this.lblValorAbril.Size = new System.Drawing.Size(13, 13);
             this.lblValorAbril.TabIndex = 48;
@@ -502,7 +491,7 @@ namespace crud
             // lblValorMaio
             // 
             this.lblValorMaio.AutoSize = true;
-            this.lblValorMaio.Location = new System.Drawing.Point(150, 127);
+            this.lblValorMaio.Location = new System.Drawing.Point(136, 127);
             this.lblValorMaio.Name = "lblValorMaio";
             this.lblValorMaio.Size = new System.Drawing.Size(13, 13);
             this.lblValorMaio.TabIndex = 47;
@@ -511,7 +500,7 @@ namespace crud
             // lblValorAgosto
             // 
             this.lblValorAgosto.AutoSize = true;
-            this.lblValorAgosto.Location = new System.Drawing.Point(150, 208);
+            this.lblValorAgosto.Location = new System.Drawing.Point(136, 208);
             this.lblValorAgosto.Name = "lblValorAgosto";
             this.lblValorAgosto.Size = new System.Drawing.Size(13, 13);
             this.lblValorAgosto.TabIndex = 46;
@@ -520,7 +509,7 @@ namespace crud
             // lblValorJunho
             // 
             this.lblValorJunho.AutoSize = true;
-            this.lblValorJunho.Location = new System.Drawing.Point(150, 182);
+            this.lblValorJunho.Location = new System.Drawing.Point(136, 182);
             this.lblValorJunho.Name = "lblValorJunho";
             this.lblValorJunho.Size = new System.Drawing.Size(13, 13);
             this.lblValorJunho.TabIndex = 45;
@@ -529,7 +518,7 @@ namespace crud
             // lblValorJulho
             // 
             this.lblValorJulho.AutoSize = true;
-            this.lblValorJulho.Location = new System.Drawing.Point(150, 153);
+            this.lblValorJulho.Location = new System.Drawing.Point(136, 153);
             this.lblValorJulho.Name = "lblValorJulho";
             this.lblValorJulho.Size = new System.Drawing.Size(13, 13);
             this.lblValorJulho.TabIndex = 44;
@@ -538,7 +527,7 @@ namespace crud
             // lblValorJan
             // 
             this.lblValorJan.AutoSize = true;
-            this.lblValorJan.Location = new System.Drawing.Point(150, 27);
+            this.lblValorJan.Location = new System.Drawing.Point(136, 27);
             this.lblValorJan.Name = "lblValorJan";
             this.lblValorJan.Size = new System.Drawing.Size(13, 13);
             this.lblValorJan.TabIndex = 30;
@@ -728,13 +717,12 @@ namespace crud
             this.Controls.Add(this.txtSalarioUpdate);
             this.Controls.Add(this.lblSalarioUpdate);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnChamados);
             this.Controls.Add(this.btnCadastroDespesas);
             this.Controls.Add(this.lblUser);
             this.Controls.Add(this.cbAdm);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lblAdm);
             this.Controls.Add(this.cbCliente);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.lblCliente);
             this.Controls.Add(this.cbFuncionario);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.gridUser);
@@ -742,7 +730,7 @@ namespace crud
             this.Controls.Add(this.btnLimpar);
             this.Controls.Add(this.btnDeletar);
             this.Controls.Add(this.cbPermissao);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblPermissao);
             this.Controls.Add(this.txtEmail_User);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtNome_User);
@@ -764,7 +752,7 @@ namespace crud
         private System.Windows.Forms.TextBox txtNome_User;
         private System.Windows.Forms.TextBox txtEmail_User;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblPermissao;
         private System.Windows.Forms.ComboBox cbPermissao;
         private System.Windows.Forms.Button btnDeletar;
         private System.Windows.Forms.Button btnLimpar;
@@ -773,12 +761,11 @@ namespace crud
         private System.Windows.Forms.ComboBox cbFuncionario;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbCliente;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblCliente;
         private System.Windows.Forms.ComboBox cbAdm;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblAdm;
         private System.Windows.Forms.Label lblUser;
         private System.Windows.Forms.Button btnCadastroDespesas;
-        private System.Windows.Forms.Button btnChamados;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;

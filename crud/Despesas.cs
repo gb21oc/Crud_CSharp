@@ -18,6 +18,9 @@ namespace crud
         {
             InitializeComponent();
             InitializeGridDespesas();
+            btnAdcLinha.Enabled = false;
+            btnRmvLinha.Enabled = false;
+            btnEnviar.Enabled = false;
         }
 
         public void sqlPreencheDataGrid(string sql)
@@ -33,6 +36,17 @@ namespace crud
                 n++;
             }
         }
+
+        public void VerificaValorMes()
+        {
+            decimal totalMes = 0;
+            foreach (DataGridViewRow row in gridDespesas.Rows)
+            {
+                totalMes += Convert.ToDecimal(row.Cells["VALOR"].Value);
+            }
+            lblTotalMes.Text = totalMes.ToString();
+        }
+
         public void PreencherDataGrid(DataTable dt)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -119,16 +133,20 @@ namespace crud
             {
                 MessageBox.Show(ex.ToString());
             }
+            finally
+            {
+                InitializeGridDespesas();
+                cbDespesasMeses.SelectedItem = null;
+                btnAdcLinha.Enabled = false;
+                btnRmvLinha.Enabled = false;
+                btnEnviar.Enabled = false;
+            }
         }
 
         
 
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
-            //if (txtGanhosRecebidos.Text == "" || txtGanhosRecebidos.Text == "0")
-            //{
-            //    lblTotalMes.Text = "0";
-            //}
             if (cbDespesasMeses.SelectedItem == null)
             {
                 MessageBox.Show("Não é possivel pesquisar as despesas com o campo 'Mes' vazio!!!");
@@ -192,14 +210,24 @@ namespace crud
                     sqlPreencheDataGrid(sql);
                     break;
             }
+            VerificaValorMes();
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
             InitializeGridDespesas();
+            lblTotalMes.Text             = "";
             cbDespesasMeses.SelectedItem = null;
-            btnAdcLinha.Enabled = false;
-            btnRmvLinha.Enabled = false;
+            btnAdcLinha.Enabled          = false;
+            btnRmvLinha.Enabled          = false;
+            btnEnviar.Enabled            = false;
+        }
+
+        private void cbDespesasMeses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnAdcLinha.Enabled = true;
+            btnRmvLinha.Enabled = true;
+            btnEnviar.Enabled = true;
         }
     }
 }
